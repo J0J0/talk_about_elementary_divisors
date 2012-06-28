@@ -1,0 +1,163 @@
+
+
+\newcommand{\ZRest}[1]{\Z/#1\Z}
+
+\chapter{Vorbereitungen}
+Es sei $R$ im Folgenden immer ein kommutativer Ring. Damit ist auch klar, dass
+wir nicht zwischen $R$-Links- und $R$-Rechtsmoduln unterscheiden müssen, so dass
+wir einfach nur $R$-Modul schreiben werden.
+
+\begin{thDef}[Länge eines Moduls]
+    Sei $M$ ein $R$-Modul. Definiere nun $\len(M)$ als das Supremum der Längen
+    $\ell$ von echt aufsteigenden Ketten von Untermoduln der Form:
+    \[ 0 \subsetneq M_1 \subsetneq M_2 \subsetneq \cdots \subsetneq M_\ell = M \]
+    Dabei lassen wir auch $\infty$ als Wert zu, so dass also $\len(M) \in
+    \N\cup\{\infty\}$.
+\end{thDef}
+
+\begin{thBemerkung}
+    Man kann die \emph{Länge eines Moduls} auch über nicht kommutativen Ringen
+    einführen. Dies wird im Folgenden aber nicht benötigt.
+\end{thBemerkung}
+
+\begin{thBeispiele}
+\item
+    Es ist offenbar $\len(M) = 0 \iff M = 0$.
+\item
+    Für den Sonderfall eines $n$-dim. $K$-Vektorraums $V$ (aufgefasst als
+    $K$-Modul) hat man $\len[K](V) = n$, wie man schnell mit Hilfe des bekannen
+    Isomorphismus $V \cong K^n$ und dessen Zerlegung $0\subsetneq K \subsetneq
+    K^2 \subsetneq \cdots \subsetneq K^n$ sieht.
+\item
+    Für $\Z$ als $\Z$-Modul hat man die Länge $\infty$ und für $\ZRest2$ als
+    $\ZRest2$-Modul erhält man die Länge $1$, da $\ZRest2$ keine echten
+    Untermoduln besitzt.
+\end{thBeispiele}
+
+Wir werden die Länge als Hilfsmittel brauchen, um den Elementarteilersatz
+% TODO: \ref einfügen
+zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
+
+\begin{thLemma}%[Länge des Restklassenmoduls]
+    Sei $R$ ein Hauptidealring\footnote{künftig abgekürzt durch: HIR} und $a\in
+    R$ mit (bis auf Assoziiertheit eindeutiger) Primfaktorzerlegung 
+    $a = p_1\cdots p_r$.
+    % TODO: (Ex. nach \cite ..)
+    Dann hat der Restklassenmodul $R/aR$ (über $R$) die Länge $\len(R/aR) = r$.
+\end{thLemma}
+\begin{proof}
+    Zunächst ist klar, dass die Ideale in $R$ gerade den Untermoduln von $R$
+    entsprechen, wenn man $R$ als Modul über sich selbst auffasst.
+
+    Sei 
+    \begin{align*}
+        \pi\colon R &\to R/aR   \\
+                  x &\mapsto \bar x
+    \end{align*}
+    der kanonische Epimorphismus. Dann kann man die Ideale $\barfrak{a} \subset
+    R/aR$ mit Hilfe von $\pi$ unter der Bildung von $\pi^{-1}(\barfrak{a})$
+    bijektiv den Idealen in $R$ zuordnen, die $aR$ enthalten. (nachrechnen!)
+    
+    Damit ist klar, dass man statt Idealketten des Typs
+    \[ 0 \subsetneq \barfrak{a}_1 \subsetneq \barfrak{a}_2 \subsetneq 
+        \cdots \subsetneq \barfrak{a}_\ell = R/aR      \]
+    auch die folgenden Idealketten betrachten kann:
+    \[ aR =: \mathfrak{a}_0 \subsetneq \mathfrak{a}_1 
+                \subsetneq \mathfrak{a}_2 \subsetneq 
+                \cdots \subsetneq \mathfrak{a}_\ell = R        \]
+    Es genügt also, das Supremum der Längen derartiger Ketten zu betrachten. Da
+    $R$ ein HIR ist, wird jedes dieser $\mathfrak{a}_i$ von einem Element $a_i$
+    erzeugt: $\mathfrak{a}_i = \Spann{a_i}$. Da für $i\in\{0,\ldots \ell-1\}$ und
+    die Ideale $\mathfrak{a}_i,\mathfrak{a}_{i+1}$ die Äquivalenz
+    % TODO: \cite
+    \[ \mathfrak{a}_i \subset \mathfrak{a}_{i+1} \iff a_{i+1} \mid a_i \]
+    gilt und wir aber echte Inklusion betrachten, erhalten wir, dass auch
+    $a_{i+1}$ ein echter Teiler von $a_i$ sein muss. Mit der vorausgesetzten
+    Primfaktorzerlegung von $a$ sehen wir nun also leicht ein, dass wir gerade
+    eine aufsteigende Kette von Idealen (die $aR$ enthalten) der Länge $r$
+    bilden können.
+    \\
+\end{proof}
+
+\begin{thLemma}[Additivität der Länge bei direkten Summen]
+    Sei ein $R$-Modul $M$ die direkte Summe zweier Untermoduln $M'$ und $M''$.
+    Dann gilt:
+    \[ \len(M) = \len(M') + \len(M'') \]
+\end{thLemma}
+\begin{proof}
+    Wir zeigen die Gleichheit in zwei Schritten:
+    \begin{description}
+        \item[\enquote{\boldmath$\geq$}:]
+            Hat man für die Untermoduln aufsteigende Ketten wie folgt:
+            \begin{align*}
+                0 \subsetneq M_1^{\prime\phantom\prime} \subsetneq
+                            M_2^{\prime\phantom\prime} 
+                            \subsetneq \cdots 
+                            \subsetneq M_r^{\prime\phantom\prime}  &= M'    \\
+                0 \subsetneq M_1'' \subsetneq M_2'' 
+                            \subsetneq \cdots \subsetneq M_s'' &= M''
+                ,
+            \end{align*}
+            so kann man direkt eine aufsteigende Kette der Länge $r+s$ für $M$
+            angeben:
+            \[ 0 \subsetneq M_1' \oplus 0 \subsetneq \cdots M_r' \oplus 0
+                \subsetneq M_r' \oplus M_1'' \subsetneq M_r' \oplus M_s'' = M \]
+            Es folgt: $\len(M) \geq \len(M') + \len(M'')$
+            
+        \item[\enquote{\boldmath$\leq$}:]
+            Um diese Relation zu zeigen, betrachten wir eine aufsteigende Kette
+            von Untermoduln von $M$:
+            \[ 0 =: M_0 \subsetneq M_1 \subsetneq M_2 \subsetneq \cdots
+            \subsetneq M_\ell = M \]
+            Dann bekommen wir zu jedem $i\in\{0,\ldots,\ell-1\}$ ein anschauliches
+            Diagramm wie folgt:
+            \begin{equation*}
+                \begin{xy}
+                    \xymatrix@C=5pt@R=13pt{
+                        M_i\cap M' \ar@{}[d]|-*[@][*1.2]{\subseteq}  & \subset
+                        & M_i      \ar@{}[d]|-*[@][*1.2]{\subsetneq} & \overset\pi\longto
+                        & \pi(M_i) \ar@{}[d]|-*[@][*1.2]{\subseteq}
+                        \\
+                        M_{i+1}\cap M' & \subset
+                        & M_{i+1} & \overset\pi\longto
+                        & \pi(M_{i+1})
+                    }
+                \end{xy}
+            \end{equation*}
+            Dabei bezeichne $\pi\colon M'\oplus M'' \to M''$ die Projektion auf
+            $M''$. Wir bemerken dabei schon einmal, dass dann gerade 
+            $\Kern(\pi) = M'$ ist.
+            
+            Nehmen wir nun einmal an, dass sowohl $M_i\cap M' = M_{i+1}\cap M'$
+            als auch $\pi(M_i) = \pi(M_{i+1})$ in obigem Diagramm gilt.
+            Wir zeigen nun, dass dies schon $M_i = M_{i+1}$ zur Folge hätte, was
+            aber nach Voraussetzung ausgeschlossen ist.
+            
+            Sei also $x\in M_{i+1}$. Dann haben wir wegen der Gleichheit
+            $\pi(M_i) = \pi(M_{i+1})$ ein $x'\in M_i$, so dass $\pi(x) =
+            \pi(x')$ gilt. Da $\pi$ linear ist, also auch: $\pi(x-x') = 0 \iff
+            x-x' \in \Kern(\pi) = M'$. Daraus folgt nun, dass $x$ und $x'$ auch
+            in $M_{i+1}\cap M'$ sein müssen und wegen der Gleichheit 
+            $M_i\cap M' = M_{i+1}\cap M'$ also auch in $M_i \cap M'$. Dann ist
+            aber auch $x-x' \in M_i\cap M' \subset M_i$. Wenn aber $x'$ und
+            $(x-x')$ in $M_i$ liegen, so auch $x = x' + (x-x') \in M_i$.
+            Damit wäre $M_{i+1} \subset M_i$. Widerspruch.
+            
+            Also muss die Annahme falsch gewesen sein und es folgt:
+            \[ \forAll_{i\in\{0,\ldots,\ell-1\}} \;
+                M_i\cap M' \subsetneq M_{i+1}\cap M'  \;\vee\;
+                \pi(M_i)   \subsetneq \pi(M_{i+1})  \]
+            Daraus ergibt sich wie gewünscht:
+            \[ \ell \leq \len(M') + \len(M'') \]
+    \end{description}
+    Insgesamt haben wir also Gleichheit, d.\,h. die Behauptung.
+    \\
+\end{proof}
+
+
+
+
+
+
+
+

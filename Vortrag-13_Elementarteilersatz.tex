@@ -1,0 +1,95 @@
+\documentclass[11pt,a4paper,ngerman,DIV=11]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[babel]{csquotes}
+\usepackage{enumerate} % TODO: replace with better 'enumitem'
+\usepackage{ifmtarg}
+%\usepackage[pdftex]{graphicx}
+\usepackage[all]{xy}
+
+\usepackage[pdftex,bookmarks,colorlinks=false,pdfborder={0 0 0},%
+            pdftitle={Proseminar Modultheorie - Vortrag 13: Elementarteilersatz},%
+            pdfauthor={Johannes Prem}]{hyperref}
+
+%
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\origepsilon}{} % keine LaTeX-Kollisionen
+\let\origepsilon=\epsilon
+\let\epsilon=\varepsilon
+
+\let\origphi=\phi
+\let\phi=\varphi
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newtheoremstyle{mythms}
+ {15pt}% Space above
+ {12pt}% Space below 
+ {}% Body font
+ {}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
+ {\bfseries}% Theorem head font
+ {.}% Punctuation after theorem head
+ {0.6cm}% Space after theorem head: Space after theorem head: { } = normal interword space; \newline = linebreak
+ {}% Theorem head spec (can be left empty, meaning `normal')
+ 
+\theoremstyle{mythms}
+\newtheorem{globalnum}{DUMMY DUMMY DUMMY}
+\newtheorem{thDef}[globalnum]{Definition}
+\newtheorem{thSatz}[globalnum]{Satz}
+\newtheorem{thPropos}[globalnum]{Proposition}
+\newtheorem{thLemma}[globalnum]{Lemma}
+
+\newtheorem{thBemerkung}[globalnum]{Bemerkung}
+\newtheorem{thBeisp}[globalnum]{Beispiel}
+\newtheorem{thBeispiele}[globalnum]{Beispiele}
+\newenvironment{BspList}{\nopagebreak\begin{thBeispiele}\hfill\begin{itemize}}{\end{itemize}\end{thBeispiele}}
+%
+
+\DeclareMathOperator*{\Exists}{\exists}
+\DeclareMathOperator*{\forAll}{\forall}
+
+\newcommand{\Mid}{\,\middle\vert\,}
+
+\makeatletter
+\newcommand{\defmathbbsymbol}[1]{%
+    \expandafter\newcommand\csname #1\endcsname[1][]{%
+        \@ifmtarg{##1}{\mathbb{#1}}{\mathbb{#1}_{##1}}%
+    }%
+}
+\makeatother
+
+\defmathbbsymbol{N}
+\defmathbbsymbol{Z}
+\defmathbbsymbol{Q}
+\defmathbbsymbol{R}
+\defmathbbsymbol{C}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\Spann}{\langle}{\rangle}
+
+\DeclareMathOperator{\Kern}{ker}
+\DeclareMathOperator{\modulelength}{\ell}
+
+\newcommand{\barfrak}[1]{\bar{\mathfrak{#1}}}
+
+\newcommand{\longto}{\longrightarrow}
+
+\newcommand{\len}[1][R]{\modulelength_{#1}}
+
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+\input{chap1.tex}
+
+\end{document}
+
