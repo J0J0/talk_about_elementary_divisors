@@ -1,7 +1,4 @@
 
-
-\newcommand{\ZRest}[1]{\Z/#1\Z}
-
 \chapter{Vorbereitungen}
 Es sei $R$ im Folgenden immer ein kommutativer Ring. Damit ist auch klar, dass
 wir nicht zwischen $R$-Links- und $R$-Rechtsmoduln unterscheiden müssen, so dass
@@ -20,7 +17,7 @@ wir einfach nur $R$-Modul schreiben werden.
     einführen. Dies wird im Folgenden aber nicht benötigt.
 \end{thBemerkung}
 
-\begin{thBeispiele}
+\begin{BspList}
 \item
     Es ist offenbar $\len(M) = 0 \iff M = 0$.
 \item
@@ -32,13 +29,13 @@ wir einfach nur $R$-Modul schreiben werden.
     Für $\Z$ als $\Z$-Modul hat man die Länge $\infty$ und für $\ZRest2$ als
     $\ZRest2$-Modul erhält man die Länge $1$, da $\ZRest2$ keine echten
     Untermoduln besitzt.
-\end{thBeispiele}
+\end{BspList}
 
 Wir werden die Länge als Hilfsmittel brauchen, um den Elementarteilersatz
 % TODO: \ref einfügen
 zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
 
-\begin{thLemma}%[Länge des Restklassenmoduls]
+\begin{thLemma}%[Länge des Restklassenmoduls über Hauptidealringen]
     Sei $R$ ein Hauptidealring\footnote{künftig abgekürzt durch: HIR} und $a\in
     R$ mit (bis auf Assoziiertheit eindeutiger) Primfaktorzerlegung 
     $a = p_1\cdots p_r$.
@@ -154,7 +151,31 @@ zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
     \\
 \end{proof}
 
+\begin{thBemerkung}
+    Kennt man das \emph{Fünferlemma}, so kann man den zweiten Schritt im
+    vorangegangenen Beweis deutlich verkürzen, indem man einfach das folgende
+    kommutative Diagramm mit exakten Zeilen betrachtet ($\pi$ wie oben):
+    \begin{equation*}
+        \newcommand{\xyhookarrowdown}{\ar@{^{(}->}[]-<0pt,11pt>;[d]+<0pt,11pt>}
+        \begin{xy}
+            \xymatrix@C=5pt@R=20pt{
+                0                                   & \longto
+                & M_i\cap M'    \xyhookarrowdown    & \longhookrightarrow
+                & M_i           \xyhookarrowdown    & \overset\pi\longto
+                & \pi(M_i)      \xyhookarrowdown    & \longto
+                & 0
+                \\
+                0                                   & \longto
+                & M_{i+1}\cap M'                    & \longhookrightarrow
+                & M_{i+1}                           & \overset\pi\longto
+                & \pi(M_{i+1})                      & \longto
+                & 0
+            }
+        \end{xy}
+    \end{equation*}
+\end{thBemerkung}
 
+Wir können nun zum eigentlichen Thema kommen:
 
 
 

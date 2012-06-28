@@ -7,7 +7,8 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage[babel]{csquotes}
-\usepackage{enumerate} % TODO: replace with better 'enumitem'
+%\usepackage{enumerate} % TODO: replace with better 'enumitem'
+\usepackage[shortlabels]{enumitem}
 \usepackage{ifmtarg}
 %\usepackage[pdftex]{graphicx}
 \usepackage[all]{xy}
@@ -50,8 +51,28 @@
 \newtheorem{thBemerkung}[globalnum]{Bemerkung}
 \newtheorem{thBeisp}[globalnum]{Beispiel}
 \newtheorem{thBeispiele}[globalnum]{Beispiele}
-\newenvironment{BspList}{\nopagebreak\begin{thBeispiele}\hfill\begin{itemize}}{\end{itemize}\end{thBeispiele}}
+\newenvironment{BspList}{%
+\nopagebreak\begin{thBeispiele}%
+\hfill\begin{enumerate}[a),parsep=0pt,itemsep=0.8ex,leftmargin=2em]%
+}{%
+\end{enumerate}\end{thBeispiele}
+}
 %
+
+\newenvironment{proofsketch}[1][]{%
+\begin{proof}[Beweisskizze#1]
+}{%
+\end{proof}
+}
+
+\makeatletter
+\let\origthmhead=\thmhead
+\renewcommand{\thmhead}[3]{%
+\phantomsection
+\origthmhead{#1}{#2}{#3}%
+\pdfbookmark[1]{#1\@ifnotempty{#1}{ }#2\thmnote{ (#3)}}{#1#2}%
+}
+\makeatother
 
 \DeclareMathOperator*{\Exists}{\exists}
 \DeclareMathOperator*{\forAll}{\forall}
@@ -84,12 +105,21 @@
 
 \newcommand{\len}[1][R]{\modulelength_{#1}}
 
+\newcommand{\longhookrightarrow}{\lhook\joinrel\relbar\joinrel\rightarrow}
 
+\newcommand{\ZRest}[1]{\Z/#1\Z}
+
+\setlist[itemize,1]{label=--}
+
+
+\SelectTips{cm}{}
+\UseTips
 \setcounter{secnumdepth}{0}
 
 \begin{document}
 
 \input{chap1.tex}
+\input{chap2.tex}
 
 \end{document}
 

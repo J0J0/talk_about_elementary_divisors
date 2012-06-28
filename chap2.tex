@@ -1,0 +1,64 @@
+
+\chapter{Der Elementarteilersatz}
+\begin{thSatz}[Elementarteilersatz]
+    Sei $F$ ein endlich erzeugter freier Modul über einem HIR $R$. Sei außerdem
+    $M\subset F$ ein Untermodul. Dann existieren Elemente $x_1,\ldots,x_s\in F$
+    und $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$ mit folgenden
+    Eigenschaften:
+    \begin{enumerate}[i)]
+        \item
+            $x_1,\ldots,x_s$ sind Teil einer Basis von $F$.
+        \item
+            $\alpha_1 x_1, \ldots, \alpha_s x_s$ bilden eine Basis von $M$.
+        \item
+            Es gilt für alle $i\in\{1,\ldots,s-1\}$:\; $\alpha_i\mid\alpha_{i+1}$.
+    \end{enumerate}
+    Außerdem sind die $\alpha_1,\ldots,\alpha_s$ bis auf Assoziiertheit
+    eindeutig durch $M$ bestimmt (unabhängig von der Wahl der $x_1,\ldots,x_s$)
+    und man nennt diese Elemente dann die \emph{Elementarteiler} von 
+    $M\subset F$.
+\end{thSatz}
+
+Der Beweis dieses Satzes wird für die Existenz- und Eindeutigkeitsaussage
+getrennt geführt und erfordert einigen Aufwand. Es soll hier deshalb nur eine
+Beweisskizze gegeben werden, in der die wichtigen Schritte dargestellt werden.
+Einen kompletten Beweis nach dem folgenden Schema kann man in 
+% TODO: \cite
+[TODO]
+nachlesen.
+
+\begin{proofsketch}[ zur Existenzaussage]
+    Wir wählen zunächst eine Basis $Y = (y_1,\ldots,y_m)$ von~$F$. Per Induktion
+    über $m$ zeigt man nun, dass auch jeder Untermodul $M\subset F$ endlich
+    erzeugt ist: für $m=0$ ist nichts zu zeigen und für $m=1$ ist die Behauptung
+    klar, da dann $F\cong R$ ist und somit gilt, dass $M$ gerade einem Ideal in
+    $R$ entspricht, welches aber nach Voraussetzung von einem einzigen Element erzeugt
+    wird; Für $m>1$ betrachtet man dann eine geeignete Zerlegung $F = F'
+    \oplus F''$, wendet auf $M\cap F'$ und die Projektion von $M$ auf $F''$ die
+    Induktionsvoraussetzung an und zeigt dann, dass man als Vereinigung von
+    endlichen Erzeugendensystemen dieser beiden Untermoduln ein
+    Erzeugendensystem für ganz $M$ erhält.
+    
+    Da wir nun wissen, dass $M$ endlich erzeugt ist, können wir ein solches
+    Erzeugendensystem $z_1,\ldots,z_n$ wählen. Weiter bezeichne $e_1,\ldots,e_n$
+    die Standardbasis von $R^n$ als $R$-Modul, so kann man eine lineare
+    Abbildung $f$ wie folgt definieren:
+    \begin{align*}
+        f\colon R^n &\to F  \\
+        e_j &\mapsto z_j
+    \end{align*}
+    <++>
+    \\
+\end{proofsketch}
+
+
+
+
+
+
+
+
+
+
+
+
