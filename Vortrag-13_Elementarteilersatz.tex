@@ -78,6 +78,7 @@
 \DeclareMathOperator*{\forAll}{\forall}
 
 \newcommand{\Mid}{\,\middle\vert\,}
+%\newcommand{\Mid}{\mathrel{\middle\vert}}
 
 \makeatletter
 \newcommand{\defmathbbsymbol}[1]{%
@@ -93,10 +94,14 @@
 \defmathbbsymbol{R}
 \defmathbbsymbol{C}
 
+\newcommand{\mr}{\mathrm}
+
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\Spann}{\langle}{\rangle}
 
 \DeclareMathOperator{\Kern}{ker}
+\DeclareMathOperator{\Image}{im}
+
 \DeclareMathOperator{\modulelength}{\ell}
 
 \newcommand{\barfrak}[1]{\bar{\mathfrak{#1}}}
@@ -109,8 +114,15 @@
 
 \newcommand{\ZRest}[1]{\Z/#1\Z}
 
-\setlist[itemize,1]{label=--}
+\newcommand{\Matrix}[1]{%
+\begin{pmatrix} #1 \end{pmatrix}%
+}
 
+\newcommand{\D}{\mr{d}}
+\newcommand{\A}[2]{a_{#1#2}}
+
+
+\setlist[itemize,1]{label=--}
 
 \SelectTips{cm}{}
 \UseTips

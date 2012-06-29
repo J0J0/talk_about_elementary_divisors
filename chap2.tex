@@ -15,8 +15,8 @@
     \end{enumerate}
     Außerdem sind die $\alpha_1,\ldots,\alpha_s$ bis auf Assoziiertheit
     eindeutig durch $M$ bestimmt (unabhängig von der Wahl der $x_1,\ldots,x_s$)
-    und man nennt diese Elemente dann die \emph{Elementarteiler} von 
-    $M\subset F$.
+    und man nennt diese Elemente dann die \emph{Elementarteiler von 
+    $M\subset F$}.
 \end{thSatz}
 
 Der Beweis dieses Satzes wird für die Existenz- und Eindeutigkeitsaussage
@@ -40,17 +40,149 @@ nachlesen.
     Erzeugendensystem für ganz $M$ erhält.
     
     Da wir nun wissen, dass $M$ endlich erzeugt ist, können wir ein solches
-    Erzeugendensystem $z_1,\ldots,z_n$ wählen. Weiter bezeichne $e_1,\ldots,e_n$
+    Erzeugendensystem $z_1,\ldots,z_n$ wählen. Bezeichne weiter $e_1,\ldots,e_n$
     die Standardbasis von $R^n$ als $R$-Modul, so kann man eine lineare
-    Abbildung $f$ wie folgt definieren:
+    Abbildung $f$ wie folgt definieren (eindeutig bestimmt, durch die Bilder auf
+    der Basis $e_j$%
+    % TODO: \cite 06/1.1  "und folgende"
+    ):
     \begin{align*}
         f\colon R^n &\to F  \\
-        e_j &\mapsto z_j
+        e_j &\mapsto z_j \,, \quad j\in\{1,\ldots,n\}
     \end{align*}
-    <++>
+    Da wir auf ein Erzeugendensystem von $M$ abbilden, gilt also
+    $\Image(f) = M$. Weiter können wir $f$ bezüglich der Basen $e_1,\ldots,e_n$
+    und $Y$ als Matrix $A\in R^{m\times n}$ darstellen, so dass für die
+    Matrixelemente $\A ij$ und $j\in\{1,\ldots,n\}$ gilt:
+    \[ z_j = \sum_{i=1}^m \A ij y_i \]
+    
+    Nun verwenden wir die \enquote{Matrixversion des Elementarteilersatzes} % TODO: \ref
+    und erhalten somit Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so
+    dass $A' := S\,A\,T$ die im Lemma genannte Form (mit Diagonalelementen
+    $\alpha_1,\ldots,\alpha_s$) hat. Nach [TODO] % TODO: \cite 08/1.11
+    können wir $S$ und $T$ gerade als Basiswechselmatrizen auffassen und
+    wissen somit, dass es Basen $e_1',\ldots,e_n'$ von $R^n$ und
+    $x_1,\ldots,x_m$ von $F$ gibt, so dass $A'$ die darstellende Matrix der
+    Abbildung $f$ ist. Da sich dadurch natürlich das Bild nicht ändert, erhalten
+    wir, dass $\alpha_1 x_1, \ldots, \alpha_n x_s$ ein Erzeugendensystem von $M$
+    bilden. Außerdem sind $x_1,\ldots,x_s$ frei und mit der Nullteilerfreiheit
+    von $R$ folgt, dass oben genanntes Erzeugendensystem auch frei ist; es
+    bildet also sogar eine Basis von $M$.
     \\
 \end{proofsketch}
 
+Damit ist nun die Existenz der Elementarteiler $\alpha_1,\ldots,\alpha_s$
+bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
+
+\begin{thLemma}[Elementarteilersatz für Matrizen]\label{ets:matrix}
+    Sei $R$ ein HIR und $A = (\A ij)_{ij} \in R^{m\times n}$. Dann gibt es
+    Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so dass gilt:
+    \begin{align*}
+        S\cdot A\cdot T 
+        &= \mr{diag}(\alpha_1,\ldots,\alpha_s,0,\ldots,0)
+        \\[3mm]
+        &= \Matrix{
+        \alpha_1 & & & & & &   \\ 
+        & \alpha_2 & & & & &   \\
+        & & \ddots & & & &     \\
+        & & & \alpha_s & & &   \\
+        & & & & 0 & &          \\
+        & & & & & \ddots &     \\
+        & & & & & & 0         
+        }
+        \in R^{m\times n}
+    \end{align*}
+    %(Dabei seien alle nicht explizit gesetzten Elemente gleich $0$.)
+    Dabei erfüllen die Einträge $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$
+    ($0\leq s\leq \min(m,n)$) für $i\in\{1,\ldots,s-1\}$ die Bedingung:
+    $\alpha_i \mid \alpha_{i+1}$. Diese Elemente nennt man dann die
+    \emph{Elementarteiler der Matrix~$A$}.
+\end{thLemma}
+
+\begin{proofsketch}[ zur Existenzaussage]
+    Man versucht die Matrix $A$ durch elementare Umformungen (ähnlich wie beim
+    Gauß-Algorithmus) in die gewünschte Form zu bringen. Jede dieser elementaren
+    Umformungen kann durch eine entsprechende Matrix $S'$ oder $T'$ dargestellt
+    werden, wodurch klar ist, dass die Existenz der behaupteten Matrizen
+    bewiesen ist, sobald durch den Algorithmus die behauptete Form erreicht
+    wurde.
+    
+    Das komplette Verfahren kann in [TODO] % TODO: \cite
+    nachgelesen werden. Es sollen hier deswegen nur die nötigen Schritte
+    angegeben werden, um es durchzuführen, ohne jedoch allzu genau auf die
+    Begründungen einzugehen.
+    
+    Sei zunächst $R$ ein euklidischer Ring mit Gradfunktion
+    $\delta\colon\R\!\setminus\!\{0\}\to\N$. % \cite
+    Sei weiter das Minimum aller Grade von Elementen der Matrix $A$ wie folgt
+    definiert:
+    \[ \D(A) := \min\bigl\{ \delta(\A ij) \;\big\vert\; \A ij\neq0,\;
+                            1\leq i\leq m, \; 1\leq j\leq n \bigr\}    \]
+    Führe nun folgenden Algorithmus durch:
+    \begin{enumerate}[1.]
+        \item[0.]
+            Ist $A=0$, so sind wir fertig, denn es ist nichts zu zeigen;
+            der Algorithmus bricht also ab.
+            Für $A\neq0$ existiert dann aber $\D(A)$, wie oben definiert, und
+            wir können fortfahren.
+            
+        \item 
+            Ist $\D(A) \neq \delta(\A11)$, so tausche Spalten und Zeilen
+            derart, dass Gleichheit gilt.
+            
+        \item
+            Gibt es nun ein $\A1j$ (mit $2\leq j\leq n$), so dass 
+            $\A11 \nmid \A1j$, so existieren Elemente $q,r\in R$ mit $\A1j =
+            q\A11 + r$, wobei $\delta(r) < \delta(\A11)$. Ziehe dann das
+            $q$-fache der ersten Spalte von der $j$-ten Spalte ab, dann ist das
+            neue $\A1j$ gleich $r$. Starte nun wieder bei 1.
+            
+            Gehe analog auch für die Elemente $\A i1$ vor.
+            
+            Bei jeder Durchführung dieses Schritts wird aber $\D(A)$ verringert,
+            welches aber nur Werte in $\N$ annehmen kann, so dass der Prozess
+            also nach endlich vielen Schritten abbrechen muss. Gehe dann über
+            zum nächsten Schritt.
+            
+        \item
+            Nun gilt also $\A11 \mid \A1j$ und $\A11 \mid \A i1$ für alle
+            $2\leq i\leq m,\; 2\leq j\leq n$. Durch Subtraktion der entsprechenden
+            Vielfachen, erreichen wir also sogar $\A 1j = \A i1 = 0$ für
+            $2\leq i\leq m$, $2\leq j\leq n$.
+            
+        \item
+            Teilt nun $\A11$ sogar alle anderen Elemente $\neq 0$ der Matrix, so
+            beginne den kompletten Algorithmus erneut mit der Teilmatrix von
+            $A$, die man durch Streichen der ersten Zeile und Spalte erhält.
+            Alle verwendeten Operationen erhalten die Eigenschaft, dass $\A11$
+            die übrigen Elemente teilt, so dass wir dann induktiv fertig sind.
+            
+            Gibt es aber $1<i\leq m,\; 1<j\leq n$ mit $\A11 \nmid \A ij$, so
+            addiere einfach die $i$-te Zeile zur ersten (was $\A11$ unverändert
+            lässt) und durchlaufe dann den Algorithmus erneut. Weil wieder
+            $\D(A)$ verringert wird, muss auch dieser Prozess nach endlich
+            vielen Schritten enden und es gilt dann der vorherige Absatz.
+    \end{enumerate}
+    Insgesamt erhalten wir also nach endlich vielen Schritten die gewünschte
+    Matrix.
+    
+    Haben wir nun statt eines euklidischen Rings nur einen HIR, so ist das
+    Verfahren nicht ganz so anschaulich, weitestgehend aber analog: wir nehmen
+    als $\delta$ die Abbildung, die jedem Element aus $R$ die Anzahl seiner
+    Primfaktoren zuordnet. Weiter müssen wir -- am Punkt $\A11 \nmid \A1j$ --
+    das \enquote{Teilen mit Rest} durch Bilden von 
+    $\beta := \mr{ggT}(\A11,\A1j)$ ersetzen und können dann mit Hilfe einer
+    geeigneten Operation erreichen, dass wir statt $\A11$ gerade $\beta$ in
+    der Matrix bekommen. Mit $\delta(\beta) < \delta(\A11)$ verringert sich also
+    wieder das Minimum $\D(A)$ und das restliche Verfahren läuft analog ab. Die
+    Details können in [TODO] % TODO: \cite
+    nachgeschlagen werden.
+    
+    Damit sei nun also die Existenzaussage des Lemmas und damit auch die von
+    Satz % (Elementarteilersatz) TODO: \ref
+    gezeigt.
+    \\
+\end{proofsketch}
 
 
 
