@@ -184,8 +184,133 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     \\
 \end{proofsketch}
 
+Nun wissen wir, dass die Elementarteiler existieren. Es fehlt aber noch der
+Beweis zur Eindeutigkeitsaussage im Elementarteilersatz. Dazu zeigen wir
+folgendes Lemma, wofür wir die eingangs eingeführte Länge $\len$ brauchen
+werden:
 
+\begin{thLemma}
+    Sei $R$ ein HIR und es gelte
+    \[ Q \cong \bigoplus_{i=1}^s R/\alpha_i R \,, \]
+    mit $\alpha_1,\ldots,\alpha_s \in R\setminus (R^\times\cup\{0\})$, wobei
+    $R^\times$ die Einheitengruppe von $R$ bezeichne, und
+    $\alpha_i\mid\alpha_{i+1}$ für $i\in\{1,\ldots,s-1\}$.
+    Dann sind $\alpha_1,\ldots,\alpha_s$ bis auf Assoziiertheit eindeutig durch
+    $Q$ bestimmt.
+\end{thLemma}
 
+\begin{proof}
+    Aus Notationsgründen invertieren wir die Nummerierung der $\alpha_i$,
+    so dass dann also $\alpha_{i+1} \mid \alpha_i$ für $i\in\{1,\ldots,s-1\}$
+    gilt. Betrachte dann zwei Zerlegungen
+    \[ Q \cong 
+        \bigoplus_{i=1}^s R/\alpha_i R \cong \bigoplus_{j=1}^t R/\beta_j R \,,\]
+    die beide die obigen Forderungen erfüllen.
+    
+    Falls es nun einen Index $k\in\{1,\ldots,\min(s,t)\}$ mit
+    $\alpha_k R \neq \beta_k R$ gibt, so wähle $k$ minimal mit dieser
+    Eigenschaft. Da $\alpha_k$ von $\alpha_{k+1},\ldots,\alpha_s$ geteilt wird,
+    hat man für $l\in\{k,\ldots,s\}$:
+    \[ \alpha_k (R/\alpha_l R) = 0 \]
+    Also erhalten wir für $\alpha_k Q$:
+    \begin{align*}
+        \alpha_k Q 
+        &\cong      \bigoplus_{i=1}^{k-1} \alpha_k (R/\alpha_i R) \oplus
+        \underbrace{\bigoplus_{i=k}^{s}   \alpha_k (R/\alpha_i R)}_{= 0}  \\
+        &\cong \bigoplus_{i=1}^{k-1} \alpha_k (R/\alpha_i R) \oplus
+               \bigoplus_{j=k}^{t}   \alpha_k (R/\beta_j R)
+    \end{align*}
+    
+    Wegen Lemma und Lemma % TODO: \ref
+    wissen wir, dass $\len(Q)$ endlich ist und damit natürlich auch
+    $\len(\alpha_k Q) \leq \len(Q)$. Vergleichen wir nun also die Längen der
+    beiden Zerlegungen in obiger Gleichung, so erhalten wir:
+    \begin{align*}
+        & &
+        \len\biggl(\; \bigoplus_{i=1}^{k-1} \alpha_k (R/\alpha_i R) \biggr)
+        &= \len\biggl(\; \bigoplus_{i=1}^{k-1} \alpha_k (R/\alpha_i R) \oplus
+                         \bigoplus_{j=k}^{t}   \alpha_k (R/\beta_j R) \biggr)
+        \\[1mm]
+        &\overset{ Lem % TODO: \ref auf angewandtes Lemma
+        }{\implies}\quad &
+        \sum_{i=1}^{k-1} \len\bigl(\alpha_k (R/\alpha_i R)\bigr)
+        &= \sum_{i=1}^{k-1} \len\bigl(\alpha_k (R/\alpha_i R)\bigr)
+         + \sum_{j=k}^{t}   \len\bigl(\alpha_k (R/\beta_j R) \bigr)
+        \\[1mm]
+        &\overset{ Lem % TODO: \ref auf angewandtes Lemma
+        }{\implies}\quad &
+        0 &= \sum_{j=k}^{t} \len\bigl(\alpha_k (R/\beta_j R) \bigr)
+    \end{align*}
+    Also muss schon $\len\bigl(\alpha_k (R/\beta_j R) \bigr) = 0$ für alle
+    $j\in\{k,\ldots,t\}$ sein. Das ist aber gleichbedeutend mit 
+    $\alpha_k (R/\beta_j R) = 0$; insbesondere folgt für $j=k$, dass $\alpha_k R \subset
+    \beta_k R$ sein muss. Mit dem umgekehrten Argument für die Zerlegung erhält
+    man analog: $\beta_k R \subset \alpha_k R$. 
+    Also wäre $\alpha_k R = \beta_k R$, was einen Widerspruch bedeutet. Es
+    gilt somit $\alpha_i R = \beta_i R$ für alle $i\in\{1,\ldots,\min(s,t)\}$.
+    
+    Nehme nun an, dass $s<t$ gilt, dann folgt mit demselben Schluss wie oben,
+    dass
+    \[ \sum_{j=s+1}^{t} \len\bigl( R/\beta_j R \bigr) = 0   \quad
+        \implies\quad \len\bigl(R/\beta_j R\bigr) = 0,\; j\in\{s+1,\ldots,t\} 
+    . \]
+    Dies ist aber ein Widerspruch dazu, dass für die Nichteinheit $\beta_j$ der
+    Restklassenmodul $R/\beta_j R$ eine Länge größer $0$ haben muss.
+    Analog führt man $t>s$ zum Widerspruch und man erhält somit $s=t$.
+    \\
+\end{proof}
+
+\begin{proof}[Beweis der Eindeutigkeitsaussage in Satz] % TODO: \ref
+    Sei dazu $x_1,\ldots,x_m$ eine Basis von $F$ und\\
+    $\alpha_1 x_1,\ldots,\alpha_s x_s$ eine Basis von $M$ mit
+    $\alpha_i\mid\alpha_{i+1}$ für alle $i\in\{1,\ldots,s-1\}$.
+    
+    Betrachte nun den Untermodul $F'\subset F$, der wie folgt definiert ist:
+    \[ F' := \bigoplus_{i=1}^s Rx_i 
+        = \bigl\{ y\in F \;\big\vert\; \exists \lambda\in R\setminus\{0\}\colon
+        \; \lambda y \in M \bigr\}  \]
+    Durch die zweite Charakterisierung wird klar, dass $F'$ nicht von der Wahl
+    der Elemente $x_1,\ldots,x_s$ abhängt.
+    Bilde dann den kanonischen Homomorphismus
+    \begin{align*}
+        F' &\to \bigoplus_{i=1}^s R/\alpha_i R      \\
+        y' = \sum_{i=1}^s a_ix_i &\mapsto (\bar{a}_1,\ldots,\bar{a}_s) \,,
+    \end{align*}
+    der offenbar surjektiv ist und $M$ als Kern besitzt. 
+    Mit dem Homomorphiesatz % TODO: \cite !?
+    folgt dann ein (eindeutiger) $R$-Modulhomomorphismus:
+    \[ F'/M \overset\sim\to \bigoplus_{i=1}^s R/\alpha_i R \]
+    Nach Lemma % TODO: \ref
+    sind damit alle Nicht-Einheiten unter den $\alpha_i$ bis auf Assoziiertheit 
+    eindeutig bestimmt. Nach [TODO] % TODO: \cite 03/3.6
+    haben alle Basen von $M$ die gleiche Länge $s$. Somit ist klar, dass dann
+    auch die Zahl der Einheiten unter den $\alpha_i$ eindeutig bestimmt ist.
+    Insgesamt gilt also die Eindeutigkeit von $\alpha_1,\ldots,\alpha_s$, wie
+    behauptet.
+    \\
+\end{proof}
+
+\begin{thKorollar}[Eindeutigkeitsaussage in Lemma] % TODO: \ref
+    Die Eindeutigkeit der Elementarteiler in Lemma % TODO: \ref
+    folgt unmittelbar aus der soeben bewiesenen Eindeutigkeit der
+    Elementarteiler in Satz. % TODO: \ref
+\end{thKorollar}
+
+Damit sind wir mit dem Beweis des Elementarteilersatzes (und der
+\enquote{Matrixversion}) fertig. Wir fassen noch einmal zusammen, dass wir uns
+auch in der Situation von Satz % TODO: \ref
+auf das konstruktive Verfahren, das in der Beweisskizze zu Lemma % TODO: \ref
+gegeben wurde, beziehen können, um konkret die Elementarteiler eines Untermoduls
+zu bestimmen:
+
+\begin{thKorollar}
+    Seien $F,F'$ endlich erzeugte freie Moduln über einem HIR $R$ und sei
+    $M\subset F$ ein Untermodul von $F$. Dann ist $M$ endlich erzeugt und für
+    eine $R$-lineare Abbildung $f\colon F'\to F$, die eine Basis von $F'$ auf
+    ein Erzeugendensystem von $M$ abbildet, gilt: Ist $A$ eine Matrixdarstellung
+    von $f$ bezüglich Basen von $F'$ und $F$, so stimmen die Elementarteiler der
+    Matrix $A$ mit denen des Untermoduls $M$ überein.
+\end{thKorollar}
 
 
 
