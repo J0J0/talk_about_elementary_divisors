@@ -79,24 +79,37 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so dass gilt:
     \begin{align*}
         S\cdot A\cdot T 
-        &= \mr{diag}(\alpha_1,\ldots,\alpha_s,0,\ldots,0)
+        &= 
+        \left( \begin{array}{c|c}
+            \mr{diag}(\alpha_1,\ldots,\alpha_s)
+            &
+            0^{s \times (n-s)}
+            \\[3pt] \hline \rule{0pt}{17pt}
+            0^{(m-s) \times s}
+            &
+            0^{(m-s) \times (n-s)}
+        \end{array} \right)
         \\[3mm]
         &= \Matrix{
         \alpha_1 & & & & & &   \\ 
         & \alpha_2 & & & & &   \\
         & & \ddots & & & &     \\
         & & & \alpha_s & & &   \\
-        & & & & 0 & &          \\
-        & & & & & \ddots &     \\
-        & & & & & & 0         
+        & & & &   & &          \\
+        & & & & &        &     \\
+        & & & & & &           
         }
         \in R^{m\times n}
     \end{align*}
-    %(Dabei seien alle nicht explizit gesetzten Elemente gleich $0$.)
-    Dabei erfüllen die Einträge $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$
+    (In der ersten Darstellung bezeichnet dabei $0^{k\times l}$ die 
+    $(k\times l)$-Nullmatrix und in der zweiten seien alle
+    nicht explizit gesetzten Elemente gleich $0$.)  \\
+    Dabei erfüllen außerdem die Einträge $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$
     ($0\leq s\leq \min(m,n)$) für $i\in\{1,\ldots,s-1\}$ die Bedingung:
     $\alpha_i \mid \alpha_{i+1}$. Diese Elemente nennt man dann die
-    \emph{Elementarteiler der Matrix~$A$}.
+    \emph{Elementarteiler der Matrix~$A$}. (Weiter wird die Form der Matrix
+    $SAT$ in der Literatur auch \emph{Smith-Normalform}, insbesondere im
+    Englischen \emph{smith normal form}, der Matrix $A$ genannt.)
 \end{thLemma}
 
 \begin{proofsketch}[ zur Existenzaussage]
@@ -285,8 +298,8 @@ werden:
     eindeutig bestimmt. Nach [TODO] % TODO: \cite 03/3.6
     haben alle Basen von $M$ die gleiche Länge $s$. Somit ist klar, dass dann
     auch die Zahl der Einheiten unter den $\alpha_i$ eindeutig bestimmt ist.
-    Insgesamt gilt also die Eindeutigkeit von $\alpha_1,\ldots,\alpha_s$, wie
-    behauptet.
+    Insgesamt gilt also die Eindeutigkeit von $\alpha_1,\ldots,\alpha_s$ (bis
+    auf Assoziiertheit), wie behauptet.
     \\
 \end{proof}
 
