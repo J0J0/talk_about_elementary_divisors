@@ -24,11 +24,11 @@ bestimmt:
     Also sind die Elementarteiler: $1,2,6 \in\Z$.
 \end{thBeisp}
 
-Wir wollen uns daher gleich einem weiteren Beispiel zuwenden, in welchem
-wir dann den Algorithmus aus dem Beweis zu Lemma % TODO: \ref
-nochmal explizit durchführen.
+Wir wollen uns daher gleich einem weiteren Beispiel zuwenden, in welchem wir
+dann den Algorithmus aus dem Beweis zu \cref{ets:matrix} nochmal explizit
+durchführen.
 
-\begin{thBeisp}
+\begin{thBeisp}\label{bsp:mat}
     Betrachte den $\Z$-Modul $\Z^3$. Seien $v_1,v_2,v_3 \in\Z^3$ und der
     Untermodul $M\subset\Z^3$ wie folgt definiert:
     \begin{gather*}
@@ -38,9 +38,8 @@ nochmal explizit durchführen.
         \\[2mm]
         M := \Spann[\big]{v_1,v_2,v_3}_{\Z}
     \end{gather*}
-    Wir möchten nun die in Satz % TODO: \ref
-    behauptete Basis $x_1,\ldots,x_3$ von $\Z^3$ und Elemente
-    $\alpha_1,\alpha_2,\alpha_3\in\Z$ bestimmen, so dass 
+    Wir möchten nun die in \cref{ets} behauptete Basis $x_1,x_2,x_3$ von
+    $\Z^3$ und Elemente $\alpha_1,\alpha_2,\alpha_3\in\Z$ bestimmen, so dass
     $\alpha_1 x_1,\alpha_2 x_2,\alpha_3 x_3$ eine Basis von $M$ bilden.
     
     Dazu betrachten wir die lineare Abbildung, dargestellt durch die Matrix
@@ -66,6 +65,8 @@ nochmal explizit durchführen.
     Umformungen zwar immer nur bei der Matrix $A$, sie werden aber natürlich
     entsprechend auch auf $S_0$ und $T_0$ angewendet. Es ergibt sich also:
     
+    \gmatrixright
+    \setlength{\arrowpos}{5.2cm}
     \begin{equation*}
         \begin{trimatrixoperations}
              1 &  0 &  0 \\ 
@@ -270,11 +271,11 @@ $\Z$ sucht. Konkret:
     %
     Wir können dies natürlich auch in Matrixschreibweise ausdrücken:
     \[ A \cdot x = \vect{62\\-2\\3} =: y \]
-    Dabei ist $A$ gerade die Matrix aus Beispiel. % TODO: \ref
+    Dabei ist $A$ gerade die Matrix aus \cref{bsp:mat}.
     
-    Benutzen wir $A' = S\!AT$ (mit $S$ und $T$ auch wie in Beisp. %TODO: \ref)
-    ), so sieht man, dass dies äquivalent zur Betrachtung von
-    \[ A' \, \underbrace{ T^{-1} x }_{x'} = \underbrace{Sy}_{y'} \]
+    Benutzen wir $A' = S\!AT$ (mit $S$ und $T$ auch wie in \cref{bsp:mat}), so
+    sieht man, dass dies äquivalent zur Betrachtung von
+    \[ A' \, \underbrace{ T^{-1} x \vphantom{y} }_{x'} = \underbrace{Sy}_{y'} \]
     ist. Wir können also die Lösungen $x'$ aus dem einfacheren Gleichungssystem
     $A' \cdot x' = y'$ ablesen und dann auf unser eigentliches Problem
     zurücktransformieren. Zunächst lesen wir die Lösungen des einfachen Systems
@@ -306,6 +307,256 @@ Elementarteilersatz komplett konstruktiv ist, kann man dieses Verfahren
 natürlich auch auf beliebig komplexere lineare Diophantische Gleichungen
 anwenden.
 
+Bisher hatten wir immer nur den Ring $\Z$ betrachtet. Der beschriebene
+Algorithmus funktioniert aber natürlich auch über komplizierteren HIR, was nun
+noch an folgendem abschließenden Beispiel demonstriert werden soll.
+
+\begin{thBeisp}
+    Betrachte den Polynomring $\R[X]$ über den reellen Zahlen. Dieser ist ein
+    euklidischer Ring (siehe [TODO] % TODO: \cite
+    ), wobei wir als Gradfunktion gerade die Abbildung $\deg\colon\R[X]\to\N$
+    haben, die jedem Polynom seinen Grad zuordnet. Weiter haben wir mit der
+    Polynomdivision ein praktisches Mittel, um zu $f,g\in\R[X]$ diejenigen
+    $q,r\in\R[X]$ zu bestimmen, so dass $f = qg+r$ gilt, mit: $r=0$ oder
+    $\deg(r)<\deg(g)$.
+    
+    Sei nun also
+    \[ A := \Matrix{ X      &  2X   \\
+                     0      &  X+1  \\
+                     X^2-X  &  0     }  
+    \in \bigl(\R[X]\bigr)^{3\times2}
+    \]
+    eine Matrix mit Koeffizienten aus $\R[X]$. Wir wollen noch einmal den
+    Algorithmus für die Bestimmung der Elementarteiler inklusive der
+    Transformationsmatrizen durchlaufen:
+    
+    \gmatrixcenter
+    \setlength{\arrowpos}{6.4cm}
+    \begin{equation*}
+        \begin{trimatrixoperations}[C]
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1 
+            \|
+            X     &  2X   \\
+            0     &  X+1  \\
+            X^2-X &  0
+            \colops
+            \add[-2]{0}{1}
+            \|
+            1 & 0 \\
+            0 & 1
+            %%%
+            \nextstep
+            %%%
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1 
+            \|
+            X     &  0    \\
+            0     &  X+1  \\
+            X^2-X &  -2X^2+2X
+            \rowops
+            \add[-(X-1)]{0}{2}
+            \|
+            1 & -2 \\
+            0 & 1
+            %%%
+            \nextstep
+            %%%
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            -X+1 & 0 & 1 
+            \|
+            X     &  0    \\
+            0     &  X+1  \\
+            0 &  -2X^2+2X
+            \rowops
+            \add{1}{0}
+            \|
+            1 & -2 \\
+            0 & 1
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0 \\
+            0 & 1 & 0 \\
+            -X+1 & 0 & 1 
+            \|
+            X     &  X+1  \\
+            0     &  X+1  \\
+            0 &  -2X^2+2X
+            \colops
+            \add[-1]{0}{1}
+            \|
+            1 & -2 \\
+            0 & 1
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0 \\
+            0 & 1 & 0 \\
+            -X+1 & 0 & 1 
+            \|
+            X     &    1  \\
+            0     &  X+1  \\
+            0 &  -2X^2+2X
+            \colops
+            \swap{0}{1}
+            \|
+            1 & -3 \\
+            0 & 1
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0 \\
+            0 & 1 & 0 \\
+            -X+1 & 0 & 1 
+            \|
+              1        &   X   \\
+            X+1        &   0   \\
+            -2X^2+2X   &   0  
+            \colops
+            \add[-X]{0}{1}
+            \|
+            -3 & 1 \\
+            1  & 0
+        \end{trimatrixoperations}
+    \end{equation*}
+    \setlength{\arrowpos}{8.4cm}
+    \begin{equation*}
+        \begin{trimatrixoperations}[C]
+            %%%
+            \continued
+            %%%
+            1 & 1 & 0 \\
+            0 & 1 & 0 \\
+            -X+1 & 0 & 1 
+            \|
+              1        &   0        \\
+            X+1        &   -X^2-X   \\
+            -2X^2+2X   &   2X^3-2X^2  
+            \rowops
+            \add[-(X+1)]{0}{1}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0 \\
+            -X-1 & -X & 0 \\
+            -X+1 & 0 & 1 
+            \|
+              1        &   0        \\
+              0        &   -X^2-X   \\
+            -2X^2+2X   &   2X^3-2X^2  
+            \rowops
+            \add[-(-2X^2+2X)]{0}{2}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+        \end{trimatrixoperations}
+    \end{equation*}
+    \setlength{\arrowpos}{8.4cm}
+    \begin{equation*}
+        \begin{trimatrixoperations}[C]
+            %%%
+            \continued
+            %%%
+            1 & 1 & 0 \\
+            -X-1 & -X & 0 \\
+            2X^2-3X+1 & 2X^2-2X & 1 
+            \|
+              1        &   0        \\
+              0        &   -X^2-X   \\
+              0        &   2X^3-2X^2  
+            \rowops
+            \add[2X-4]{1}{2}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0       \\
+            -X-1 & -X & 0   \\
+            -X+5 & 2X & 1 
+            \|
+              1        &   0        \\
+              0        &   -X^2-X   \\
+              0        &   4X  
+            \rowops
+            \swap{1}{2}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0       \\
+            -X+5 & 2X & 1   \\
+            -X-1 & -X & 0   
+            \|
+              1        &   0        \\
+              0        &   4X       \\
+              0        &   -X^2-X
+            \rowops
+            \add[\frac{1}{4}(X+1)]{1}{2}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0       \\
+            -X+5 & 2X & 1   \\
+            -\frac{1}{4} (X^2-1) & \frac{1}{2} (X^2-X) & \frac{1}{4} (X+1)   
+            \|
+              1        &   0        \\
+              0        &   4X       \\
+              0        &   0
+            \colops
+            \mult{1}{\cdot 4^{-1}}
+            \|
+            -3 & 1+3X \\
+            1  & -X
+            %%%
+            \nextstep
+            %%%
+            1 & 1 & 0       \\
+            -X+5 & 2X & 1   \\
+            -\frac{1}{4} (X^2-1) & \frac{1}{2} (X^2-X) & \frac{1}{4} (X+1)   
+            \|
+              1        &   0       \\
+              0        &   X       \\
+              0        &   0
+            \|
+            -3 & \frac{1}{4}+\frac{3}{4}X \\
+            1  & -\frac{1}{4}X
+        \end{trimatrixoperations}
+    \end{equation*}
+    
+    \medskip
+    Wir erhalten also die Elementarteiler $1,X\in\R[X]$ und die
+    Transformationsmatrizen
+    \begin{align*}
+        S &= \Matrix{
+        1 & 1 & 0       \\[3pt]
+        -X+5 & 2X & 1   \\[3pt]
+        -\frac{1}{4} (X^2-1) & \frac{1}{2} (X^2-X) & \frac{1}{4} (X+1)   }
+        \in \bigl(\R[X]\bigr)^{3\times3}
+        \qquad\text{und}
+        \\[3mm]
+        T &= \Matrix{
+            -3 & \frac{1}{4}+\frac{3}{4}X   \\[3pt]
+            1  & -\frac{1}{4}X                  }
+        \in \bigl(\R[X]\bigr)^{2\times2}
+    .
+    \end{align*}
+        
+    
+\end{thBeisp}
 
 
 
