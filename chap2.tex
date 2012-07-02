@@ -1,6 +1,6 @@
 
 \chapter{Der Elementarteilersatz}
-\begin{thSatz}[Elementarteilersatz]
+\begin{thSatz}[Elementarteilersatz]\label{ets}
     Sei $F$ ein endlich erzeugter freier Modul über einem HIR $R$. Sei außerdem
     $M\subset F$ ein Untermodul. Dann existieren Elemente $x_1,\ldots,x_s\in F$
     und $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$ mit folgenden
@@ -56,7 +56,8 @@ nachlesen.
     Matrixelemente $\A ij$ und $j\in\{1,\ldots,n\}$ gilt:
     \[ z_j = \sum_{i=1}^m \A ij y_i \]
     
-    Nun verwenden wir die \enquote{Matrixversion des Elementarteilersatzes} % TODO: \ref
+    Nun verwenden wir die \enquote{Matrixversion des Elementarteilersatzes}
+    \pcref{ets:matrix}
     und erhalten somit Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so
     dass $A' := S\,A\,T$ die im Lemma genannte Form (mit Diagonalelementen
     $\alpha_1,\ldots,\alpha_s$) hat. Nach [TODO] % TODO: \cite 08/1.11
@@ -192,8 +193,7 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     nachgeschlagen werden.
     
     Damit sei nun also die Existenzaussage des Lemmas und damit auch die von
-    Satz % (Elementarteilersatz) TODO: \ref
-    gezeigt.
+    \cref{ets} gezeigt.
     \\
 \end{proofsketch}
 
@@ -202,7 +202,7 @@ Beweis zur Eindeutigkeitsaussage im Elementarteilersatz. Dazu zeigen wir
 folgendes Lemma, wofür wir die eingangs eingeführte Länge $\len$ brauchen
 werden:
 
-\begin{thLemma}
+\begin{thLemma}\label{lem:iso:divisors:unique}
     Sei $R$ ein HIR und es gelte
     \[ Q \cong \bigoplus_{i=1}^s R/\alpha_i R \,, \]
     mit $\alpha_1,\ldots,\alpha_s \in R\setminus (R^\times\cup\{0\})$, wobei
@@ -234,7 +234,7 @@ werden:
                \bigoplus_{j=k}^{t}   \alpha_k (R/\beta_j R)
     \end{align*}
     
-    Wegen Lemma und Lemma % TODO: \ref
+    Wegen \cref{lem:len:hir} und \cref{lem:len:add}
     wissen wir, dass $\len(Q)$ endlich ist und damit natürlich auch
     $\len(\alpha_k Q) \leq \len(Q)$. Vergleichen wir nun also die Längen der
     beiden Zerlegungen in obiger Gleichung, so erhalten wir:
@@ -244,14 +244,12 @@ werden:
         &= \len\biggl(\; \bigoplus_{i=1}^{k-1} \alpha_k (R/\alpha_i R) \oplus
                          \bigoplus_{j=k}^{t}   \alpha_k (R/\beta_j R) \biggr)
         \\[1mm]
-        &\overset{ Lem % TODO: \ref auf angewandtes Lemma
-        }{\implies}\quad &
+        &\overset{ \ref{lem:len:add} }{\implies}\quad &
         \sum_{i=1}^{k-1} \len\bigl(\alpha_k (R/\alpha_i R)\bigr)
         &= \sum_{i=1}^{k-1} \len\bigl(\alpha_k (R/\alpha_i R)\bigr)
          + \sum_{j=k}^{t}   \len\bigl(\alpha_k (R/\beta_j R) \bigr)
         \\[1mm]
-        &\overset{ Lem % TODO: \ref auf angewandtes Lemma
-        }{\implies}\quad &
+        &\overset{ \ref{lem:len:hir} }{\implies}\quad &
         0 &= \sum_{j=k}^{t} \len\bigl(\alpha_k (R/\beta_j R) \bigr)
     \end{align*}
     Also muss schon $\len\bigl(\alpha_k (R/\beta_j R) \bigr) = 0$ für alle
@@ -273,7 +271,7 @@ werden:
     \\
 \end{proof}
 
-\begin{proof}[Beweis der Eindeutigkeitsaussage in Satz] % TODO: \ref
+\begin{proof}[Beweis der Eindeutigkeitsaussage in \cref{ets}]
     Sei dazu $x_1,\ldots,x_m$ eine Basis von $F$ und\\
     $\alpha_1 x_1,\ldots,\alpha_s x_s$ eine Basis von $M$ mit
     $\alpha_i\mid\alpha_{i+1}$ für alle $i\in\{1,\ldots,s-1\}$.
@@ -293,7 +291,7 @@ werden:
     Mit dem Homomorphiesatz % TODO: \cite !?
     folgt dann ein (eindeutiger) $R$-Modulhomomorphismus:
     \[ F'/M \overset\sim\to \bigoplus_{i=1}^s R/\alpha_i R \]
-    Nach Lemma % TODO: \ref
+    Nach \cref{lem:iso:divisors:unique}
     sind damit alle Nicht-Einheiten unter den $\alpha_i$ bis auf Assoziiertheit 
     eindeutig bestimmt. Nach [TODO] % TODO: \cite 03/3.6
     haben alle Basen von $M$ die gleiche Länge $s$. Somit ist klar, dass dann
@@ -303,21 +301,21 @@ werden:
     \\
 \end{proof}
 
-\begin{thKorollar}[Eindeutigkeitsaussage in Lemma] % TODO: \ref
-    Die Eindeutigkeit der Elementarteiler in Lemma % TODO: \ref
+\begin{thKorollar}[Eindeutigkeitsaussage in \cref{ets:matrix}]
+    Die Eindeutigkeit der Elementarteiler in \cref{ets:matrix}
     folgt unmittelbar aus der soeben bewiesenen Eindeutigkeit der
-    Elementarteiler in Satz. % TODO: \ref
+    Elementarteiler in \cref{ets}.
 \end{thKorollar}
 
 Damit sind wir mit dem Beweis des Elementarteilersatzes (und der
 \enquote{Matrixversion}) fertig. Wir fassen noch einmal zusammen, dass wir uns
-auch in der Situation von Satz % TODO: \ref
-auf das konstruktive Verfahren, das in der Beweisskizze zu Lemma % TODO: \ref
+auch in der Situation von \cref{ets}
+auf das konstruktive Verfahren, das in der Beweisskizze zu \cref{ets:matrix}
 gegeben wurde, beziehen können, um konkret die Elementarteiler eines Untermoduls
 zu bestimmen:
 
 \begin{thKorollar}
-    Seien $F,F'$ endlich erzeugte freie Moduln über einem HIR $R$ und sei
+    Seien $F,F'$ endlich erzeugte freie Moduln über einem HIR $R$ und sei weiter
     $M\subset F$ ein Untermodul von $F$. Dann ist $M$ endlich erzeugt und für
     eine $R$-lineare Abbildung $f\colon F'\to F$, die eine Basis von $F'$ auf
     ein Erzeugendensystem von $M$ abbildet, gilt: Ist $A$ eine Matrixdarstellung

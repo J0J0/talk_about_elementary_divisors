@@ -18,8 +18,11 @@
 \usepackage[pdftex,bookmarks,colorlinks=false,pdfborder={0 0 0},%
             pdftitle={Proseminar Modultheorie - Vortrag 13: Elementarteilersatz},%
             pdfauthor={Johannes Prem}]{hyperref}
-
 %
+\usepackage{cleveref}
+
+\newcommand{\pref}[1]{(\ref{#1})}
+\newcommand{\pcref}[1]{(\cref{#1})}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5em}
@@ -83,13 +86,17 @@
 \newcommand{\Mid}{\,\middle\vert\,}
 %\newcommand{\Mid}{\mathrel{\middle\vert}}
 
-\makeatletter
+%\makeatletter
+%\newcommand{\defmathbbsymbol}[1]{%
+%    \expandafter\newcommand\csname #1\endcsname[1][]{%
+%        \@ifmtarg{##1}{\mathbb{#1}}{\mathbb{#1}_{##1}}%
+%    }%
+%}
+%\makeatother
 \newcommand{\defmathbbsymbol}[1]{%
-    \expandafter\newcommand\csname #1\endcsname[1][]{%
-        \@ifmtarg{##1}{\mathbb{#1}}{\mathbb{#1}_{##1}}%
-    }%
+    \expandafter\newcommand\csname #1\endcsname{\mathbb{#1}}%
 }
-\makeatother
+
 
 \defmathbbsymbol{N}
 \defmathbbsymbol{Z}
@@ -130,12 +137,18 @@
 
 % make gmatrix right aligned
 \makeatletter
-  \edef\g@post{\relax$}
+
+\let\g@post@orig=\g@post
+
+\newcommand{\gmatrixright}{%
+    \global\edef\g@post{\relax$}
+}
+\newcommand{\gmatrixcenter}{%
+    \global\let\g@post=\g@post@orig
+}
+
 \makeatother
 
-% damn syntax highlighter gets confused by opening $
-% fix this:
-\newcommand{\willneverbeusedforanything}{$}
 
 %%%%%
 
@@ -146,8 +159,11 @@
 \newcommand{\matops@newline}{\end{gmatrix}\\\matops@turnsinto}
 \newcommand{\matops@end}{\end{gmatrix}}
 
+\newlength{\arrowpos}
+\setlength{\arrowpos}{5cm}
+
 \newcommand{\matops@turnsinto}{%
-\noalign{\vskip7pt\hbox to 5.2cm{\hfill\downsquigarrow}\vskip7pt}%
+\noalign{\vskip7pt\hbox to \arrowpos{\hfill\downsquigarrow}\vskip7pt}%
 }
 
 \newcommand{\nextcol}{\matops@colend}
@@ -175,13 +191,12 @@
 \newcolumntype{C}{>{\matops@colstart}c}
 \newcolumntype{L}{>{\matops@colstart}l}
 
-%\begin{array}{@{\matops@leftparen}R@{}c@{}C@{}c@{}L@{\matops@rightparen}}
-\newenvironment{trimatrixoperations}{%
+\newenvironment{trimatrixoperations}[1][L]{%
 \renewcommand{\|}{\matops@colend}
 \begin{array}{@{\matops@leftparen\,}%
               R%
               @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
-              L%
+              #1%
               @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
               L%
               @{\kern-4pt\matops@rightparen}}

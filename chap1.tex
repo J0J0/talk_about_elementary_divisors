@@ -32,10 +32,11 @@ wir einfach nur $R$-Modul schreiben werden.
 \end{BspList}
 
 Wir werden die Länge als Hilfsmittel brauchen, um den Elementarteilersatz
-% TODO: \ref einfügen
-zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
+\pref{ets} zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die
+Länge:
 
-\begin{thLemma}%[Länge des Restklassenmoduls über Hauptidealringen]
+\begin{thLemma}[Länge des Restklassenmoduls über Hauptidealringen]%
+    \label{lem:len:hir}
     Sei $R$ ein Hauptidealring\footnote{künftig abgekürzt durch: HIR} und $a\in
     R$ mit (bis auf Assoziiertheit eindeutiger) Primfaktorzerlegung 
     $a = p_1\cdots p_r$.
@@ -53,7 +54,7 @@ zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
     \end{align*}
     der kanonische Epimorphismus. Dann kann man die Ideale $\barfrak{a} \subset
     R/aR$ mit Hilfe von $\pi$ unter der Bildung von $\pi^{-1}(\barfrak{a})$
-    bijektiv den Idealen in $R$ zuordnen, die $aR$ enthalten. (nachrechnen!)
+    bijektiv den Idealen in $R$ zuordnen, die $aR$ enthalten. (nachprüfen!)
     
     Damit ist klar, dass man statt Idealketten des Typs
     \[ 0 \subsetneq \barfrak{a}_1 \subsetneq \barfrak{a}_2 \subsetneq 
@@ -76,7 +77,8 @@ zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die Länge:
     \\
 \end{proof}
 
-\begin{thLemma}[Additivität der Länge bei direkten Summen]
+\begin{thLemma}[Additivität der Länge bei direkten Summen]%
+    \label{lem:len:add}
     Sei ein $R$-Modul $M$ die direkte Summe zweier Untermoduln $M'$ und $M''$.
     Dann gilt:
     \[ \len(M) = \len(M') + \len(M'') \]
