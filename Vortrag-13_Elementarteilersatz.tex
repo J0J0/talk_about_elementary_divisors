@@ -6,12 +6,14 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{array}
 \usepackage[babel]{csquotes}
 %\usepackage{enumerate} % TODO: replace with better 'enumitem'
 \usepackage[shortlabels]{enumitem}
 \usepackage{ifmtarg}
 %\usepackage[pdftex]{graphicx}
 \usepackage[all]{xy}
+\usepackage{gauss}
 
 \usepackage[pdftex,bookmarks,colorlinks=false,pdfborder={0 0 0},%
             pdftitle={Proseminar Modultheorie - Vortrag 13: Elementarteilersatz},%
@@ -42,7 +44,7 @@
  {}% Theorem head spec (can be left empty, meaning `normal')
  
 \theoremstyle{mythms}
-\newtheorem{globalnum}{DUMMY DUMMY DUMMY}
+\newtheorem{globalnum}{DUMMY DUMMY DUMMY}[chapter]
 \newtheorem{thDef}[globalnum]{Definition}
 \newtheorem{thSatz}[globalnum]{Satz}
 %\newtheorem{thPropos}[globalnum]{Proposition}
@@ -115,12 +117,87 @@
 
 \newcommand{\ZRest}[1]{\Z/#1\Z}
 
-\newcommand{\Matrix}[1]{%
+\newcommand*{\Matrix}[1]{%
 \begin{pmatrix} #1 \end{pmatrix}%
 }
+\newcommand{\vect}{}
+\let\vect=\Matrix
 
 \newcommand{\D}{\mr{d}}
 \newcommand{\A}[2]{a_{#1#2}}
+
+\newcommand{\downsquigarrow}{\rotatebox{-90}{$\rightsquigarrow$}}
+
+% make gmatrix right aligned
+\makeatletter
+  \edef\g@post{\relax$}
+\makeatother
+
+% damn syntax highlighter gets confused by opening $
+% fix this:
+\newcommand{\willneverbeusedforanything}{$}
+
+%%%%%
+
+\makeatletter
+
+\newcommand{\matops@colstart}{\begin{gmatrix}}
+\newcommand{\matops@colend}{\end{gmatrix}&}
+\newcommand{\matops@newline}{\end{gmatrix}\\\matops@turnsinto}
+\newcommand{\matops@end}{\end{gmatrix}}
+
+\newcommand{\matops@turnsinto}{%
+\noalign{\vskip7pt\hbox to 5.2cm{\hfill\downsquigarrow}\vskip7pt}%
+}
+
+\newcommand{\nextcol}{\matops@colend}
+\newcommand{\nextstep}{\matops@newline}
+\newcommand{\continued}{\matops@turnsinto}
+
+\newsavebox{\matops@matrixh}
+\newlength{\matops@matrixheight}
+\savebox{\matops@matrixh}{$\displaystyle\begin{gmatrix}1\\2\\3\end{gmatrix}$}
+\setlength{\matops@matrixheight}{\ht\matops@matrixh}
+\addtolength{\matops@matrixheight}{\dp\matops@matrixh}
+
+\newcommand{\matops@interrule}{%
+\rule[-0.8\dp\matops@matrixh]{0.4pt}{0.9\matops@matrixheight}}
+
+\newcommand{\matops@interspaceleft}{\quad}
+\newcommand{\matops@interspaceright}{\qquad}
+
+\newcommand{\matops@leftparen}{%
+\ensuremath{\displaystyle\left(\vphantom{\matops@interrule}\right.}}
+\newcommand{\matops@rightparen}{%
+\ensuremath{\displaystyle\left.\vphantom{\matops@interrule}\right)}}
+    
+\newcolumntype{R}{>{\matops@colstart}r}
+\newcolumntype{C}{>{\matops@colstart}c}
+\newcolumntype{L}{>{\matops@colstart}l}
+
+%\begin{array}{@{\matops@leftparen}R@{}c@{}C@{}c@{}L@{\matops@rightparen}}
+\newenvironment{matrixoperations}{%
+\renewcommand{\|}{\matops@colend}
+\begin{array}{@{\matops@leftparen\,}%
+              R%
+              @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
+              L%
+              @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
+              L%
+              @{\kern-4pt\matops@rightparen}}
+}{%
+\matops@end
+\end{array}
+}
+
+\makeatother
+
+\newcommand{\vzfix}{\phantom{-}}
+
+%\newcommand{\p}[1]{\cdot(#1)}
+%\newcommand{\m}[1]{\cdot(-#1)}
+
+%%%%%
 
 
 \setlist[itemize,1]{label=--}
@@ -133,6 +210,7 @@
 
 \input{chap1.tex}
 \input{chap2.tex}
+\input{chap3.tex}
 
 \end{document}
 

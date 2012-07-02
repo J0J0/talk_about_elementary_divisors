@@ -1,0 +1,225 @@
+
+\chapter{Beispiele und Anwendungen}
+Ein erstes Beispiel haben wir schon in [TODO] % TODO: \cite 08
+gesehen. Dort wurden durch einfache Umformungen die Elementarteiler einer Matrix
+bestimmt:
+
+\begin{thBeisp}[siehe auch {[TODO]}] % TODO: \cite 08/2.6
+    Sei 
+    \[ A := \Matrix{
+           6 & 2 &  5 \\
+          32 & 2 & 28 \\
+          30 & 2 & 26  } \in \Z^{3\times3}
+    \,. \]
+    Mit dem beschriebenen Algorithmus erhält man dann:
+    \[
+        A
+        \rightsquigarrow \ldots
+        \rightsquigarrow 
+    \Matrix{
+        1 & 0 & 0 \\
+        0 & 2 & 0 \\
+        0 & 0 & 6  }
+    \]
+    Also sind die Elementarteiler: $1,2,6 \in\Z$.
+\end{thBeisp}
+
+Wir wollen uns daher gleich einem weiteren Beispiel zuwenden, in welchem
+wir dann den Algorithmus aus dem Beweis zu Lemma % TODO: \ref
+nochmal explizit durchführen.
+
+\begin{thBeisp}
+    Betrachte den $\Z$-Modul $\Z^3$. Seien $v_1,v_2,v_3 \in\Z^3$ und der
+    Untermodul $M\subset\Z^3$ wie folgt definiert:
+    \begin{gather*}
+        v_1 := \vect{2\\-2\\0}, \quad 
+        v_2 := \vect{0\\ 0\\7}, \quad
+        v_3 := \vect{8\\-2\\1},
+        \\[2mm]
+        M := \Spann[\big]{v_1,v_2,v_3}_{\Z}
+    \end{gather*}
+    Wir möchten nun die in Satz % TODO: \ref
+    behauptete Basis $x_1,\ldots,x_3$ von $\Z^3$ und Elemente
+    $\alpha_1,\ldots,\alpha_3\in\Z$ bestimmen, so dass 
+    $\alpha_1 x_1,\ldots,\alpha_3 x_3$ eine Basis von $M$ bilden.
+    
+    Dazu betrachten wir die lineare Abbildung, dargestellt durch die Matrix
+    \[ A := \Matrix{ 2 & 0 &  8 \\
+                    -2 & 0 & -2 \\
+                     0 & 7 &  1  }  \, \]
+    welche offensichtlich die Standardbasis von $\Z^3$ auf das Erzeugendensystem
+    $v_1,v_2,v_3$ von $M$ abbildet. Wir können nun das oben beschriebene
+    Verfahren anwenden, um $A'$ zu erhalten. Diesmal sind wir aber zusätzlich an
+    den Transformationsmatrizen $S$ und $T$ interessiert, so dass $SAT = A'$
+    gilt. (Wieso wird weiter unten klar werden.) Um $S$ und $T$ gleich
+    zusätzlich zu $A'$ zu erhalten, setzen wir $S_0:=T_0:=E_3$ (wobei $E_3$ die
+    $(3\times3)$-Einheitsmatrix bezeichnet) und betrachten das erweiterte System
+    $S_0|A|T_0$. Wir wenden dann alle Operationen, die Zeilen (Spalten)
+    betreffen, zusätzlich auf $S_0$ ($T_0$) an bekommen so die gewünschten 
+    Transformationsmatrizen gleich mit dazu.
+    %
+    (Dass dies funktioniert, wird ersichtlich, wenn man sich noch einmal klarmacht,
+    dass eigentlich alle durchgeführten Operationen einer Matrixmultiplikation
+    entsprechen: von links bei Zeilen- und von recht bei Spaltenumformungen.)
+    
+    Es wird nun der Algorithmus für $A$ durchlaufen. Dabei stehen die nötigen
+    Umformungen zwar immer nur bei der Matrix $A$, sie werden aber natürlich
+    entsprechend auch auf $S_0$ und $T_0$ angewendet.
+    
+    \begin{equation*}
+        \begin{matrixoperations}
+             1 &  0 &  0 \\ 
+             0 &  1 &  0 \\
+             0 &  0 &  1
+            \|
+             2 &  0 &  8 \\
+            -2 &  0 & -2 \\
+             0 &  7 &  1
+             \rowops
+             \swap{0}{2}
+             \colops
+             \swap{0}{2}
+            \|
+             1 &  0 &  0 \\ 
+             0 &  1 &  0 \\
+             0 &  0 &  1
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  0 \\
+             1 &  0 &  0  
+            \|
+             1 &  7 &  0 \\
+            -2 &  0 & -2 \\
+             8 &  0 &  2
+             \colops
+             \add[-7]{0}{1}
+            \|
+             0 &  0 &  1 \\
+             0 &  1 &  0 \\
+             1 &  0 &  0  
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  0 \\
+             1 &  0 &  0  
+            \|
+             1 &   0 &  0 \\
+            -2 &  14 & -2 \\
+             8 & -56 &  2
+             \rowops
+             \add[2]{0}{1}
+             \add[-8]{0}{2}
+            \|
+             0 &  0 &  1 \\
+             0 &  1 &  0 \\
+             1 & -7 &  0  
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  2 \\
+             1 &  0 & -8  
+            \|
+            \vzfix
+             1 &   0 &  0 \\
+             0 &  14 & -2 \\
+             0 & -56 &  2
+             \colops
+             \swap{1}{2}
+            \|
+             0 &  0 &  1 \\
+             0 &  1 &  0 \\
+             1 & -7 &  0  
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  2 \\
+             1 &  0 & -8  
+            \|
+            \vzfix
+             1 &  0 &   0 \\
+             0 & -2 &  14 \\
+             0 &  2 & -56
+             \colops
+             \add[7]{1}{2}
+            \|
+             0 &  1 &  0 \\
+             0 &  0 &  1 \\
+             1 &  0 & -7  
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  2 \\
+             1 &  0 & -8  
+            \|
+            \vzfix
+             1 &  0 &   0 \\
+             0 & -2 &   0 \\
+             0 &  2 & -42
+             \rowops
+             \add{1}{2}
+            \|
+             0 &  1 &  7 \\
+             0 &  0 &  1 \\
+             1 &  0 & -7  
+        \end{matrixoperations}
+    \end{equation*}
+    \begin{equation*}
+        \begin{matrixoperations}
+            %%%
+            \continued
+            %%%
+             0 &  0 &  1 \\
+             0 &  1 &  2 \\
+             1 &  1 & -6  
+            \|
+            \vzfix
+             1 &  0 &   0 \\
+             0 & -2 &   0 \\
+             0 &  0 & -42
+             \rowops
+             \mult{1}{\cdot(-1)}
+             \colops
+             \mult{2}{\cdot(-1)}
+            \|
+             0 &  1 &  7 \\
+             0 &  0 &  1 \\
+             1 &  0 & -7  
+            %%%
+            \nextstep
+            %%%
+             0 &  0 &  1 \\
+             0 & -1 & -2 \\
+             1 &  1 & -6  
+            \|
+            \vzfix
+             1 &  0 &   0 \\
+             0 &  2 &   0 \\
+             0 &  0 &  42
+            \|
+             0 &  1 & -7 \\
+             0 &  0 & -1 \\
+             1 &  0 &  7  
+        \end{matrixoperations}
+    \end{equation*}
+\end{thBeisp}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
