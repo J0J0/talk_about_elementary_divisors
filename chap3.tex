@@ -40,21 +40,21 @@ nochmal explizit durchführen.
     \end{gather*}
     Wir möchten nun die in Satz % TODO: \ref
     behauptete Basis $x_1,\ldots,x_3$ von $\Z^3$ und Elemente
-    $\alpha_1,\ldots,\alpha_3\in\Z$ bestimmen, so dass 
-    $\alpha_1 x_1,\ldots,\alpha_3 x_3$ eine Basis von $M$ bilden.
+    $\alpha_1,\alpha_2,\alpha_3\in\Z$ bestimmen, so dass 
+    $\alpha_1 x_1,\alpha_2 x_2,\alpha_3 x_3$ eine Basis von $M$ bilden.
     
     Dazu betrachten wir die lineare Abbildung, dargestellt durch die Matrix
     \[ A := \Matrix{ 2 & 0 &  8 \\
                     -2 & 0 & -2 \\
-                     0 & 7 &  1  }  \, \]
+                     0 & 7 &  1  }  , \]
     welche offensichtlich die Standardbasis von $\Z^3$ auf das Erzeugendensystem
     $v_1,v_2,v_3$ von $M$ abbildet. Wir können nun das oben beschriebene
     Verfahren anwenden, um $A'$ zu erhalten. Diesmal sind wir aber zusätzlich an
-    den Transformationsmatrizen $S$ und $T$ interessiert, so dass $SAT = A'$
+    den Transformationsmatrizen $S$ und $T$ interessiert, so dass $S\!AT = A'$
     gilt. (Wieso wird weiter unten klar werden.) Um $S$ und $T$ gleich
     zusätzlich zu $A'$ zu erhalten, setzen wir $S_0:=T_0:=E_3$ (wobei $E_3$ die
     $(3\times3)$-Einheitsmatrix bezeichnet) und betrachten das erweiterte System
-    $S_0|A|T_0$. Wir wenden dann alle Operationen, die Zeilen (Spalten)
+    $(S_0|A|T_0)$. Wir wenden dann alle Operationen, die Zeilen (Spalten)
     betreffen, zusätzlich auf $S_0$ ($T_0$) an bekommen so die gewünschten 
     Transformationsmatrizen gleich mit dazu.
     %
@@ -64,10 +64,10 @@ nochmal explizit durchführen.
     
     Es wird nun der Algorithmus für $A$ durchlaufen. Dabei stehen die nötigen
     Umformungen zwar immer nur bei der Matrix $A$, sie werden aber natürlich
-    entsprechend auch auf $S_0$ und $T_0$ angewendet.
+    entsprechend auch auf $S_0$ und $T_0$ angewendet. Es ergibt sich also:
     
     \begin{equation*}
-        \begin{matrixoperations}
+        \begin{trimatrixoperations}
              1 &  0 &  0 \\ 
              0 &  1 &  0 \\
              0 &  0 &  1
@@ -167,10 +167,10 @@ nochmal explizit durchführen.
              0 &  1 &  7 \\
              0 &  0 &  1 \\
              1 &  0 & -7  
-        \end{matrixoperations}
+        \end{trimatrixoperations}
     \end{equation*}
     \begin{equation*}
-        \begin{matrixoperations}
+        \begin{trimatrixoperations}
             %%%
             \continued
             %%%
@@ -205,9 +205,106 @@ nochmal explizit durchführen.
              0 &  1 & -7 \\
              0 &  0 & -1 \\
              1 &  0 &  7  
-        \end{matrixoperations}
+        \end{trimatrixoperations}
     \end{equation*}
+    
+    \medskip
+    Wir erhalten also die Elementarteiler $\alpha_1 = 1,\; \alpha_2 = 2$ und
+    $\alpha_3 = 42$ und zusätzlich die Transformationsmatrizen
+    \[ S = \Matrix{
+             0 &  0 &  1 \\
+             0 & -1 & -2 \\
+             1 &  1 & -6  } 
+       \quad\text{und}\quad
+       T = \Matrix{
+             0 &  1 & -7 \\
+             0 &  0 & -1 \\
+             1 &  0 &  7  }
+    . \]
+    (Streng genommen haben wir im letzten Schritt der obigen Umformungen
+    außerhalb des beschriebenen Verfahrens operiert; dass die Multiplikation
+    einer Zeile oder Spalte mit einer Einheit auch erlaubt ist, sieht man aber
+    schnell ein.)
+    
+    Nun ist aber $S$ gerade die Basiswechselmatrix von der neuen Basis
+    $x_1,x_2,x_3$ in die Standardbasis und wir müssen somit nur noch $S$
+    invertieren und können dann die passenden Elemente $x_1,x_2,x_3$ in den Spalten
+    von $S^{-1}$ ablesen. (Es bleibt dem Leser überlassen, ein
+    Invertierungsverfahren konkret anzuwenden; es bietet sich beispielsweise
+    [Loher] % TODO: \cite 10/2.8
+    an.) Man bekommt dann:
+    \[ S^{-1} = \Matrix{
+                     8 &  1 & 1 \\
+                    -2 & -1 & 0 \\
+                     1 &  0 & 0  }  \]
+    Da nun $S^{-1}$ gerade von der Standardbasis in die neue Basis wechselt,
+    haben wir für letztere:
+    \[
+        x_1 := \vect{8\\-2\\1}, \quad 
+        x_2 := \vect{1\\-1\\0}, \quad
+        x_3 := \vect{1\\ 0\\0}    \]
+    Da wir die Elementarteiler schon haben, können wir nun auch sofort die
+    gewünscht Basis für $M$ angeben:
+    \[
+        \alpha_1 x_1 := \vect{8\\-2\\1}, \quad 
+        \alpha_2 x_2 := \vect{2\\-2\\0}, \quad
+        \alpha_3 x_3 := \vect{42\\0\\0}    \]
+
+    Wir haben nun zwar $T$ gar nicht benötigt, jedoch wird im nächsten Beispiel 
+    klar werden, warum wir uns die Mühe gemacht haben, auch $T$ zu berechnen.
 \end{thBeisp}
+
+Kommen wir nun zu einer sehr anschaulichen Anwendung des Elementarteilersatzes.
+Man kann diesen nämlich auch dazu verwenden, sog. \emph{lineare Diophantische
+Gleichungen} konstruktiv zu lösen. Darunter versteht man lineare
+Gleichungssysteme mit Koeffizienten aus~$\Z$, wobei man auch nur Lösungen aus
+$\Z$ sucht. Konkret:
+
+\begin{thBeisp}
+    Wir suchen ganzzahlige Lösungen des folgenden Gleichungssystems:
+    \begin{alignat*}{4}
+         &2x_1  &\quad&      &\quad&            +8x_3  &\quad=&\quad \; 62             \\
+        -&2x_1  &\quad&      &\quad&            -2x_3  &\quad=&\quad            {-2}   \\
+         &      &\quad& 7x_2 &\quad& +\phantom{1} x_3  &\quad=&\quad \phantom{+}  3
+    \end{alignat*}
+    %
+    Wir können dies natürlich auch in Matrixschreibweise ausdrücken:
+    \[ A \cdot x = \vect{62\\-2\\3} =: y \]
+    Dabei ist $A$ gerade die Matrix aus Beispiel. % TODO: \ref
+    
+    Benutzen wir $A' = S\!AT$ (mit $S$ und $T$ auch wie in Beisp. %TODO: \ref)
+    ), so sieht man, dass dies äquivalent zur Betrachtung von
+    \[ A' \, \underbrace{ T^{-1} x }_{x'} = \underbrace{Sy}_{y'} \]
+    ist. Wir können also die Lösungen $x'$ aus dem einfacheren Gleichungssystem
+    $A' \cdot x' = y'$ ablesen und dann auf unser eigentliches Problem
+    zurücktransformieren. Zunächst lesen wir die Lösungen des einfachen Systems
+    ab:
+    \[ A' \cdot x' = \Matrix{
+                 1 &  0 &   0 \\
+                 0 &  2 &   0 \\
+                 0 &  0 &  42  } \cdot x' \overset{!}{=}
+       \vect{3\\-4\\42} 
+       = S \cdot \vect{62\\-2\\3}
+       \quad
+       \implies
+       \quad
+       x' = \vect{3\\-2\\1}  \]
+    Nun berechnen wir mit Hilfe von $T$ die gesuchte Lösung $x$:
+    \[ x = T x' = 
+            \Matrix{
+             0 &  1 &  7 \\
+             0 &  0 &  1 \\
+             1 &  0 & -7  } \cdot \vect{3\\-2\\1}
+         = \vect{-9\\-1\\10} \]
+    Setzt man nun $x_1 = -9,\; x_2 = -1,\; x_3 = 10$ in das obige
+    Gleichungssystem ein, so wird man sehen, dass dies tatsächlich die
+    Lösung darstellt.
+\end{thBeisp}
+
+Die war natürlich ein recht einfaches Beispiel. Da aber der Algorithmus zum
+Elementarteilersatz komplett konstruktiv ist, kann man dieses Verfahren
+natürlich auch auf beliebig komplexere lineare Diophantische Gleichungen
+anwenden.
 
 
 
