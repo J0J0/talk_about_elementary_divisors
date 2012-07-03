@@ -1,10 +1,9 @@
 
 \chapter{Beispiele und Anwendungen}
-Ein erstes Beispiel haben wir schon in [TODO] % TODO: \cite 08
-gesehen. Dort wurden durch einfache Umformungen die Elementarteiler einer Matrix
-bestimmt:
+Ein erstes Beispiel haben wir schon bei Rümplein\cite{talk:ruemp} gesehen. Dort wurden
+durch einfache Umformungen die Elementarteiler einer Matrix bestimmt:
 
-\begin{thBeisp}[siehe auch {[TODO]}] % TODO: \cite 08/2.6
+\begin{thBeisp}[siehe auch {\cite[2.6]{talk:ruemp}}]
     Sei 
     \[ A := \Matrix{
            6 & 2 &  5 \\
@@ -39,7 +38,7 @@ durchführen.
         M := \Spann[\big]{v_1,v_2,v_3}_{\Z}
     \end{gather*}
     Wir möchten nun die in \cref{ets} behauptete Basis $x_1,x_2,x_3$ von
-    $\Z^3$ und Elemente $\alpha_1,\alpha_2,\alpha_3\in\Z$ bestimmen, so dass
+    $\Z^3$ und diejenigen Elemente $\alpha_1,\alpha_2,\alpha_3\in\Z$ bestimmen, so dass
     $\alpha_1 x_1,\alpha_2 x_2,\alpha_3 x_3$ eine Basis von $M$ bilden.
     
     Dazu betrachten wir die lineare Abbildung, dargestellt durch die Matrix
@@ -59,7 +58,7 @@ durchführen.
     %
     (Dass dies funktioniert, wird ersichtlich, wenn man sich noch einmal klarmacht,
     dass eigentlich alle durchgeführten Operationen einer Matrixmultiplikation
-    entsprechen: von links bei Zeilen- und von recht bei Spaltenumformungen.)
+    entsprechen: von links bei Zeilen- und von rechts bei Spaltenumformungen.)
     
     Es wird nun der Algorithmus für $A$ durchlaufen. Dabei stehen die nötigen
     Umformungen zwar immer nur bei der Matrix $A$, sie werden aber natürlich
@@ -232,8 +231,7 @@ durchführen.
     invertieren und können dann die passenden Elemente $x_1,x_2,x_3$ in den Spalten
     von $S^{-1}$ ablesen. (Es bleibt dem Leser überlassen, ein
     Invertierungsverfahren konkret anzuwenden; es bietet sich beispielsweise
-    [Loher] % TODO: \cite 10/2.8
-    an.) Man bekommt dann:
+    \cite[2.6]{talk:loh} an.) Man bekommt dann:
     \[ S^{-1} = \Matrix{
                      8 &  1 & 1 \\
                     -2 & -1 & 0 \\
@@ -302,7 +300,7 @@ $\Z$ sucht. Konkret:
     Lösung darstellt.
 \end{thBeisp}
 
-Die war natürlich ein recht einfaches Beispiel. Da aber der Algorithmus zum
+Dies war natürlich ein recht einfaches Beispiel. Da aber der Algorithmus zum
 Elementarteilersatz komplett konstruktiv ist, kann man dieses Verfahren
 natürlich auch auf beliebig komplexere lineare Diophantische Gleichungen
 anwenden.
@@ -313,8 +311,8 @@ noch an folgendem abschließenden Beispiel demonstriert werden soll.
 
 \begin{thBeisp}
     Betrachte den Polynomring $\R[X]$ über den reellen Zahlen. Dieser ist ein
-    euklidischer Ring (siehe [TODO] % TODO: \cite
-    ), wobei wir als Gradfunktion gerade die Abbildung $\deg\colon\R[X]\to\N$
+    euklidischer Ring (siehe \cite[??]{talk:rief}),
+    wobei wir als Gradfunktion gerade die Abbildung $\deg\colon\R[X]\to\N$
     haben, die jedem Polynom seinen Grad zuordnet. Weiter haben wir mit der
     Polynomdivision ein praktisches Mittel, um zu $f,g\in\R[X]$ diejenigen
     $q,r\in\R[X]$ zu bestimmen, so dass $f = qg+r$ gilt, mit: $r=0$ oder

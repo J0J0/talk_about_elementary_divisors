@@ -1,6 +1,6 @@
 
 \chapter{Vorbereitungen}
-Es sei $R$ im Folgenden immer ein kommutativer Ring. Damit ist auch klar, dass
+Es sei $R$ im Folgenden immer ein kommutativer Ring mit Eins. Damit ist auch klar, dass
 wir nicht zwischen $R$-Links- und $R$-Rechtsmoduln unterscheiden müssen, so dass
 wir einfach nur $R$-Modul schreiben werden.
 
@@ -8,7 +8,7 @@ wir einfach nur $R$-Modul schreiben werden.
     Sei $M$ ein $R$-Modul. Definiere nun $\len(M)$ als das Supremum der Längen
     $\ell$ von echt aufsteigenden Ketten von Untermoduln der Form:
     \[ 0 \subsetneq M_1 \subsetneq M_2 \subsetneq \cdots \subsetneq M_\ell = M \]
-    Dabei lassen wir auch $\infty$ als Wert zu, so dass also $\len(M) \in
+    Dabei lassen wir auch $\infty$ als Wert zu, also: $\len(M) \in
     \N\cup\{\infty\}$.
 \end{thDef}
 
@@ -32,7 +32,7 @@ wir einfach nur $R$-Modul schreiben werden.
 \end{BspList}
 
 Wir werden die Länge als Hilfsmittel brauchen, um den Elementarteilersatz
-\pref{ets} zu zeigen. Dazu benötigen wir noch zwei einfache Lemma über die
+\pref{ets} zu zeigen. Dazu benötigen wir noch zwei einfache Lemmata über die
 Länge:
 
 \begin{thLemma}[Länge des Restklassenmoduls über Hauptidealringen]%
@@ -67,12 +67,12 @@ Länge:
     $R$ ein HIR ist, wird jedes dieser $\mathfrak{a}_i$ von einem Element $a_i$
     erzeugt: $\mathfrak{a}_i = \Spann{a_i}$. Da für $i\in\{0,\ldots \ell-1\}$ und
     die Ideale $\mathfrak{a}_i,\mathfrak{a}_{i+1}$ die Äquivalenz
-    % TODO: \cite
+    % TODO: \cite ??
     \[ \mathfrak{a}_i \subset \mathfrak{a}_{i+1} \iff a_{i+1} \mid a_i \]
     gilt und wir aber echte Inklusion betrachten, erhalten wir, dass auch
     $a_{i+1}$ ein echter Teiler von $a_i$ sein muss. Mit der vorausgesetzten
     Primfaktorzerlegung von $a$ sehen wir nun also leicht ein, dass wir gerade
-    eine aufsteigende Kette von Idealen (die $aR$ enthalten) der Länge $r$
+    eine aufsteigende Kette von Idealen (die $aR$ enthalten) der Länge~$r$
     bilden können.
     \\
 \end{proof}

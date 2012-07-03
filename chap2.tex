@@ -23,8 +23,7 @@ Der Beweis dieses Satzes wird für die Existenz- und Eindeutigkeitsaussage
 getrennt geführt und erfordert einigen Aufwand. Es soll hier deshalb nur eine
 Beweisskizze gegeben werden, in der die wichtigen Schritte dargestellt werden.
 Einen kompletten Beweis nach dem folgenden Schema kann man in 
-% TODO: \cite
-[TODO]
+\cite[S.\,210, Theorem~4~ff.]{bookc:bosch08}
 nachlesen.
 
 \begin{proofsketch}[ zur Existenzaussage]
@@ -43,9 +42,7 @@ nachlesen.
     Erzeugendensystem $z_1,\ldots,z_n$ wählen. Bezeichne weiter $e_1,\ldots,e_n$
     die Standardbasis von $R^n$ als $R$-Modul, so kann man eine lineare
     Abbildung $f$ wie folgt definieren (eindeutig bestimmt, durch die Bilder auf
-    der Basis $e_j$%
-    % TODO: \cite 06/1.1  "und folgende"
-    ):
+    der Basis $e_j$, siehe auch \cite[1.1\,ff.]{talk:rei}):
     \begin{align*}
         f\colon R^n &\to F  \\
         e_j &\mapsto z_j \,, \quad j\in\{1,\ldots,n\}
@@ -60,7 +57,7 @@ nachlesen.
     \pcref{ets:matrix}
     und erhalten somit Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so
     dass $A' := S\,A\,T$ die im Lemma genannte Form (mit Diagonalelementen
-    $\alpha_1,\ldots,\alpha_s$) hat. Nach [TODO] % TODO: \cite 08/1.11
+    $\alpha_1,\ldots,\alpha_s$) hat. Nach \cite[1.11]{talk:ruemp}
     können wir $S$ und $T$ gerade als Basiswechselmatrizen auffassen und
     wissen somit, dass es Basen $e_1',\ldots,e_n'$ von $R^n$ und
     $x_1,\ldots,x_m$ von $F$ gibt, so dass $A'$ die darstellende Matrix der
@@ -105,8 +102,8 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     (In der ersten Darstellung bezeichnet dabei $0^{k\times l}$ die 
     $(k\times l)$-Nullmatrix und in der zweiten seien alle
     nicht explizit gesetzten Elemente gleich $0$.)  \\
-    Dabei erfüllen außerdem die Einträge $\alpha_1,\ldots,\alpha_s\in R\setminus\{0\}$
-    ($0\leq s\leq \min(m,n)$) für $i\in\{1,\ldots,s-1\}$ die Bedingung:
+    Dabei erfüllen außerdem die Einträge $\alpha_1,\ldots,\alpha_s\in
+    R\!\setminus\!\{0\}$ ($0\leq s\leq \min(m,n)$) für $i\in\{1,\ldots,s-1\}$ die Bedingung:
     $\alpha_i \mid \alpha_{i+1}$. Diese Elemente nennt man dann die
     \emph{Elementarteiler der Matrix~$A$}. (Weiter wird die Form der Matrix
     $SAT$ in der Literatur auch \emph{Smith-Normalform}, insbesondere im
@@ -121,13 +118,14 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     bewiesen ist, sobald durch den Algorithmus die behauptete Form erreicht
     wurde.
     
-    Das komplette Verfahren kann in [TODO] % TODO: \cite
+    Das komplette Verfahren kann in \cite[S.\,211, Lemma~5]{bookc:bosch08}
     nachgelesen werden. Es sollen hier deswegen nur die nötigen Schritte
     angegeben werden, um es durchzuführen, ohne jedoch allzu genau auf die
     Begründungen einzugehen.
     
     Sei zunächst $R$ ein euklidischer Ring mit Gradfunktion
-    $\delta\colon\R\!\setminus\!\{0\}\to\N$. % \cite
+    $\delta\colon\R\!\setminus\!\{0\}\to\N$. 
+    (Siehe auch \cite[??]{talk:rief}.) % TODO
     Sei weiter das Minimum aller Grade von Elementen der Matrix $A$ wie folgt
     definiert:
     \[ \D(A) := \min\bigl\{ \delta(\A ij) \;\big\vert\; \A ij\neq0,\;
@@ -189,8 +187,7 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     geeigneten Operation erreichen, dass wir statt $\A11$ gerade $\beta$ in
     der Matrix bekommen. Mit $\delta(\beta) < \delta(\A11)$ verringert sich also
     wieder das Minimum $\D(A)$ und das restliche Verfahren läuft analog ab. Die
-    Details können in [TODO] % TODO: \cite
-    nachgeschlagen werden.
+    Details können in \cite[S.\,213\,f.]{bookc:bosch08} nachgeschlagen werden.
     
     Damit sei nun also die Existenzaussage des Lemmas und damit auch die von
     \cref{ets} gezeigt.
@@ -278,7 +275,7 @@ werden:
     
     Betrachte nun den Untermodul $F'\subset F$, der wie folgt definiert ist:
     \[ F' := \bigoplus_{i=1}^s Rx_i 
-        = \bigl\{ y\in F \;\big\vert\; \exists \lambda\in R\setminus\{0\}\colon
+        = \bigl\{ y\in F \;\big\vert\; \exists \lambda\in R\setminus\!\{0\}\colon
         \; \lambda y \in M \bigr\}  \]
     Durch die zweite Charakterisierung wird klar, dass $F'$ nicht von der Wahl
     der Elemente $x_1,\ldots,x_s$ abhängt.
@@ -293,7 +290,7 @@ werden:
     \[ F'/M \overset\sim\to \bigoplus_{i=1}^s R/\alpha_i R \]
     Nach \cref{lem:iso:divisors:unique}
     sind damit alle Nicht-Einheiten unter den $\alpha_i$ bis auf Assoziiertheit 
-    eindeutig bestimmt. Nach [TODO] % TODO: \cite 03/3.6
+    eindeutig bestimmt. Nach \cite[3.6]{talk:stad}
     haben alle Basen von $M$ die gleiche Länge $s$. Somit ist klar, dass dann
     auch die Zahl der Einheiten unter den $\alpha_i$ eindeutig bestimmt ist.
     Insgesamt gilt also die Eindeutigkeit von $\alpha_1,\ldots,\alpha_s$ (bis

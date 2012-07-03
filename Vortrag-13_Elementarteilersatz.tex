@@ -7,6 +7,7 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{array}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage[babel]{csquotes}
 %\usepackage{enumerate} % TODO: replace with better 'enumitem'
 \usepackage[shortlabels]{enumitem}
@@ -223,9 +224,14 @@
 
 \begin{document}
 
+\input{chap0.tex}
 \input{chap1.tex}
 \input{chap2.tex}
 \input{chap3.tex}
+
+\appendix
+\bibliographystyle{plaindin}
+\bibliography{bibsources}
 
 \end{document}
 
