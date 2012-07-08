@@ -1,9 +1,10 @@
 
 \chapter{Beispiele und Anwendungen}
-Ein erstes Beispiel haben wir schon bei Rümplein\cite{talk:ruemp} gesehen. Dort wurden
+Ein erstes Beispiel haben wir schon bei Rümpelein\cite{talk:ruemp} gesehen. Dort wurden
 durch einfache Umformungen die Elementarteiler einer Matrix bestimmt:
 
-\begin{thBeisp}[siehe auch {\cite[2.6]{talk:ruemp}}]
+\begin{thBeisp}[%
+    \texorpdfstring{siehe auch {\cite[2.6]{talk:ruemp}}}{2.6 bei Rümpelein}]
     Sei 
     \[ A := \Matrix{
            6 & 2 &  5 \\
@@ -309,10 +310,11 @@ Bisher hatten wir immer nur den Ring $\Z$ betrachtet. Der beschriebene
 Algorithmus funktioniert aber natürlich auch über komplizierteren HIR, was nun
 noch an folgendem abschließenden Beispiel demonstriert werden soll.
 
-\begin{thBeisp}
+\begin{thBeisp}\label{bsp:polyring}
     Betrachte den Polynomring $\R[X]$ über den reellen Zahlen. Dieser ist ein
     euklidischer Ring (siehe \cite[??]{talk:rief}),
-    wobei wir als Gradfunktion gerade die Abbildung $\deg\colon\R[X]\to\N$
+    wobei wir als Gradfunktion gerade die Abbildung \vspace*{-7pt}
+    \[ \deg\colon\R[X]\!\setminus\!\{0\}\to\N       \vspace*{-7pt}   \] 
     haben, die jedem Polynom seinen Grad zuordnet. Weiter haben wir mit der
     Polynomdivision ein praktisches Mittel, um zu $f,g\in\R[X]$ diejenigen
     $q,r\in\R[X]$ zu bestimmen, so dass $f = qg+r$ gilt, mit: $r=0$ oder
@@ -556,7 +558,87 @@ noch an folgendem abschließenden Beispiel demonstriert werden soll.
     
 \end{thBeisp}
 
+Um wenigstens einen Abriss davon zu geben, wie das Verfahren auch ohne
+euklidsche \enquote{Division mit Rest} zurechtkommt, werden wir das letzte
+Beispiel noch einmal aufgreifen, wobei wir kurzfristig vergessen, dass $\R[X]$
+sogar ein euklidischer Ring ist, und somit $\R[X]$ nur als HIR betrachten.
 
+\begin{thBemerkung}
+    Es gibt natürlich auch richtige Beispiele von HIR, die nicht euklidisch
+    sind; da jedoch schon der mitunter einfachste solche Fall (nämlich der
+    Ganzheitsring $\Z[\sqrt{-19}\,]$ zu $\Q(\sqrt{-19}\,)$) eher kompliziert ist,
+    wird an dieser Stelle auf die Konstruktion und Durchführung eines derartigen
+    Beispiels verzichtet und dem erfahreneren Leser zur Übung überlassen.
+\end{thBemerkung}
+
+\begin{thBeisp}
+    Betrachten wir erneut die Matrix
+    \[ A_0 := \Matrix{ X      &  2X   \\
+                     0      &  X+1  \\
+                     X^2-X  &  0     }  
+    \in \bigl(\R[X]\bigr)^{3\times2}
+    \]
+    aus \cref{bsp:polyring}. Da die ersten drei Umformungsschritte identisch sind,
+    gehen wir gleich zur Matrix
+    \[ A_1 := \Matrix{
+            X     &  X+1  \\
+            0     &  X+1  \\
+            0 &  -2X^2+2X   } \]
+    über, wie wir sie in der vierten erweiterten Matrix in \cref{bsp:polyring}
+    vorfinden. Da wir nun aber kein \enquote{Teilen mit Rest} mehr zur Verfügung
+    haben, müssen wir vorgehen, wie in der Beweisskizze zu \cref{ets:matrix}
+    angedeutet:
+
+    Der $\mr{ggT}$ von $X$ und $X+1$ ist offenbar $1$. Weiter gilt für
+    $\sigma=-1$ und $\tau=1$:
+    \[ \sigma \cdot X + \tau \cdot (X+1) = 1 \quad\text{und}\quad
+        \sigma \cdot (-1) - \tau \cdot 0 = 1  .\]
+    Wir können deshalb durch Multiplikation mit der Matrix
+    \[ T_1' := \Matrix{ -1 & 0 \\ 1 & -1 } \]
+    von rechts erreichen, dass $X$ durch $1$ ersetzt wird:
+    \[ A_2 := A_1 \cdot T_1' 
+        = \Matrix{    1      & -X-1 \\
+                    X+1      & -X-1 \\
+                    -2X^2+2X & 2X^2-2X }     \]
+    Um sich klarzumachen, wie man gerade auf dieses $T_1'$ kommt, kann man
+    wieder in \cite[S.\,213\,f.]{bookc:bosch08} nachschlagen.
+
+    Nun führt man abermals die (vom Prinzip her) bekannten Subtraktionsschritte
+    durch und gelangt somit zu:
+    \[ A_3 := \Matrix{  1 & 0     \\
+                        0 & X^2+X \\
+                        0 & -2X^3+2X^2 }   \]
+    %
+    Wir müssen nun wieder den $\mr{ggT}$ der beiden Matrixelemente $X^2+X$ und
+    $-2X^3+2X^2$ bestimmen. Es bietet sich an, gleich den \emph{erweiterten
+    Euklidschen Algorithmus} darauf anzuwenden, da man die dabei zusätzlich
+    gewonnenen Elemente sowieso benötigt. Wir erhalten:
+    \[ \left( 1-\frac{1}{2}X \right) \cdot (X^2+X) + \left( -\frac{1}{4} \right)
+        \cdot (-2X^3+2X^2) = X  \]
+    Die Transformationsmatrix lautet dann:
+    \[ S_3' := \Matrix{ 1 & 0 & 0                           \\[3pt]
+                        0 & 1-\frac{1}{2}X  & -\frac{1}{4}  \\[3pt]
+                        0 & -2X^2+2X        & X+1               }   \]
+    %
+    Multiplizieren wir $A_3$ mit $S_3'$ von links, so ergibt sich:
+    \[ A_4 := S_3' \cdot A_3 
+        = \Matrix{  1   &   0   \\
+                    0   &   X   \\
+                    0   & -4X^4+4X^2    }       \]
+    Dies kann nun durch entsprechende Subtraktion auf dasselbe Ergebnis wie in
+    \cref{bsp:polyring} gebracht werden. Wir erhalten also dieselben
+    Elementarteiler. Weiter hätte man natürlich auch wieder passende
+    (im Allgemeinen von denen in \cref{bsp:polyring} verschiedene)
+    Transformationsmatrizen erhalten, hätte man jeweils zusätzlich zu den
+    Matrizen $T_1'$ und $S_3'$ die passenden Matrizen, die für die
+    Subtraktionsoperationen nötig waren, notiert und mit $T_1'$ und $S_3'$
+    multipliziert.
+
+    Wir sehen also, dass sich auch im allgemeinen Fall von HIR (ohne euklidsche
+    Struktur -- denn diese haben wir nun gar nicht benutzt --) die
+    \enquote{Matrixversion des Elementarteilersatzes} anwenden lässt, wobei die
+    Konstruktion der nötigen Transformationsmatrizen eben etwas aufwändiger ist.
+\end{thBeisp}
 
 
 
