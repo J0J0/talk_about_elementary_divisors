@@ -20,11 +20,10 @@
 \end{thSatz}
 
 Der Beweis dieses Satzes wird für die Existenz- und Eindeutigkeitsaussage
-getrennt geführt und erfordert einigen Aufwand. Es soll hier deshalb nur eine
-Beweisskizze gegeben werden, in der die wichtigen Schritte dargestellt werden.
-Einen kompletten Beweis nach dem folgenden Schema kann man in 
-\cite[S.\,210, Theorem~4~ff.]{bookc:bosch08}
-nachlesen.
+getrennt geführt und erfordert einigen Aufwand. Es soll hier zur Existenz
+deshalb nur eine Beweisskizze gegeben werden, in der die wichtigen Schritte
+dargestellt werden.  Einen kompletten Beweis nach dem folgenden Schema kann man
+in \cite[S.\,210, Theorem~4~ff.]{bookc:bosch08} nachlesen.
 
 \begin{proofsketch}[ zur Existenzaussage]
     Wir wählen zunächst eine Basis $Y = (y_1,\ldots,y_m)$ von~$F$. Per Induktion
@@ -32,7 +31,7 @@ nachlesen.
     erzeugt ist: für $m=0$ ist nichts zu zeigen und für $m=1$ ist die Behauptung
     klar, da dann $F\cong R$ ist und somit gilt, dass $M$ gerade einem Ideal in
     $R$ entspricht, welches aber nach Voraussetzung von einem einzigen Element erzeugt
-    wird; Für $m>1$ betrachtet man dann eine geeignete Zerlegung $F = F'
+    wird. Für $m>1$ betrachtet man dann eine geeignete Zerlegung $F = F'
     \oplus F''$, wendet auf $M\cap F'$ und die Projektion von $M$ auf $F''$ die
     Induktionsvoraussetzung an und zeigt dann, dass man als Vereinigung von
     endlichen Erzeugendensystemen dieser beiden Untermoduln ein
@@ -56,7 +55,7 @@ nachlesen.
     Nun verwenden wir die \enquote{Matrixversion des Elementarteilersatzes}
     \pcref{ets:matrix}
     und erhalten somit Matrizen $S\in\mr{GL}(m,R)$ und $T\in\mr{GL}(n,R)$, so
-    dass $A' := S\,A\,T$ die im Lemma genannte Form (mit Diagonalelementen
+    dass $A' := SA\,T$ die im Lemma genannte Form (mit Diagonalelementen
     $\alpha_1,\ldots,\alpha_s$) hat. Nach \cite[1.11]{talk:ruemp}
     können wir $S$ und $T$ gerade als Basiswechselmatrizen auffassen und
     wissen somit, dass es Basen $e_1',\ldots,e_n'$ von $R^n$ und
@@ -106,17 +105,17 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     R\!\setminus\!\{0\}$ ($0\leq s\leq \min(m,n)$) für $i\in\{1,\ldots,s-1\}$ die Bedingung:
     $\alpha_i \mid \alpha_{i+1}$. Diese Elemente nennt man dann die
     \emph{Elementarteiler der Matrix~$A$}. (Weiter wird die Form der Matrix
-    $SAT$ in der Literatur auch \emph{Smith-Normalform}, insbesondere im
+    $S\!AT$ in der Literatur auch \emph{Smith-Normalform}, insbesondere im
     Englischen \emph{smith normal form}, der Matrix $A$ genannt.)
 \end{thLemma}
 
 \begin{proofsketch}[ zur Existenzaussage]
     Man versucht die Matrix $A$ durch elementare Umformungen (ähnlich wie beim
     Gauß-Algorithmus) in die gewünschte Form zu bringen. Jede dieser elementaren
-    Umformungen kann durch eine entsprechende Matrix $S'$ oder $T'$ dargestellt
-    werden, wodurch klar ist, dass die Existenz der behaupteten Matrizen
-    bewiesen ist, sobald durch den Algorithmus die behauptete Form erreicht
-    wurde.
+    Umformungen kann durch eine entsprechende (invertierbare) Matrix $S'$ oder
+    $T'$ dargestellt werden, wodurch klar ist, dass die Existenz der behaupteten
+    Matrizen bewiesen ist, sobald durch den Algorithmus die behauptete Form
+    erreicht wurde.
     
     Das komplette Verfahren kann in \cite[S.\,211, Lemma~5]{bookc:bosch08}
     nachgelesen werden. Es sollen hier deswegen nur die nötigen Schritte
@@ -125,7 +124,7 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     
     Sei zunächst $R$ ein euklidischer Ring mit Gradfunktion
     $\delta\colon\R\!\setminus\!\{0\}\to\N$. 
-    (Siehe auch \cite[??]{talk:rief}.) % TODO
+    (Siehe auch \cite[Def.~4]{talk:rief}.) % TODO: check cite!
     Sei weiter das Minimum aller Grade von Elementen der Matrix $A$ wie folgt
     definiert:
     \[ \D(A) := \min\bigl\{ \delta(\A ij) \;\big\vert\; \A ij\neq0,\;
@@ -151,7 +150,7 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
             
             Gehe analog auch für die Elemente $\A i1$ vor.
             
-            Bei jeder Durchführung dieses Schritts wird aber $\D(A)$ verringert,
+            Bei jeder Durchführung dieses Schritts wird $\D(A)$ verringert,
             welches aber nur Werte in $\N$ annehmen kann, so dass der Prozess
             also nach endlich vielen Schritten abbrechen muss. Gehe dann über
             zum nächsten Schritt.
@@ -169,7 +168,7 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
             Alle verwendeten Operationen erhalten die Eigenschaft, dass $\A11$
             die übrigen Elemente teilt, so dass wir dann induktiv fertig sind.
             
-            Gibt es aber $1<i\leq m,\; 1<j\leq n$ mit $\A11 \nmid \A ij$, so
+            Gibt es aber $2\leq i\leq m,\; 2\leq j\leq n$ mit $\A11 \nmid \A ij$, so
             addiere einfach die $i$-te Zeile zur ersten (was $\A11$ unverändert
             lässt) und durchlaufe dann den Algorithmus erneut. Weil wieder
             $\D(A)$ verringert wird, muss auch dieser Prozess nach endlich
@@ -285,7 +284,7 @@ werden:
         y' = \sum_{i=1}^s a_ix_i &\mapsto (\bar{a}_1,\ldots,\bar{a}_s) \,,
     \end{align*}
     der offenbar surjektiv ist und $M$ als Kern besitzt. 
-    Mit dem Homomorphiesatz % TODO: \cite !?
+    Mit dem Homomorphie- bzw. Isomorphiesatz \cite[5.2]{talk:markl}
     folgt dann ein (eindeutiger) $R$-Modulhomomorphismus:
     \[ F'/M \overset\sim\to \bigoplus_{i=1}^s R/\alpha_i R \]
     Nach \cref{lem:iso:divisors:unique}

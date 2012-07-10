@@ -292,9 +292,9 @@ $\Z$ sucht. Konkret:
     Nun berechnen wir mit Hilfe von $T$ die gesuchte Lösung $x$:
     \[ x = T x' = 
             \Matrix{
-             0 &  1 &  7 \\
-             0 &  0 &  1 \\
-             1 &  0 & -7  } \cdot \vect{3\\-2\\1}
+             0 &  1 & -7 \\
+             0 &  0 & -1 \\
+             1 &  0 &  7  } \cdot \vect{3\\-2\\1}
          = \vect{-9\\-1\\10} \]
     Setzt man nun $x_1 = -9,\; x_2 = -1,\; x_3 = 10$ in das obige
     Gleichungssystem ein, so wird man sehen, dass dies tatsächlich die
@@ -308,11 +308,11 @@ anwenden.
 
 Bisher hatten wir immer nur den Ring $\Z$ betrachtet. Der beschriebene
 Algorithmus funktioniert aber natürlich auch über komplizierteren HIR, was nun
-noch an folgendem abschließenden Beispiel demonstriert werden soll.
+noch am folgenden Beispiel demonstriert werden soll.
 
 \begin{thBeisp}\label{bsp:polyring}
     Betrachte den Polynomring $\R[X]$ über den reellen Zahlen. Dieser ist ein
-    euklidischer Ring (siehe \cite[??]{talk:rief}),
+    euklidischer Ring (siehe \cite[Kor.~5]{talk:rief}), % TODO: check cite!
     wobei wir als Gradfunktion gerade die Abbildung \vspace*{-7pt}
     \[ \deg\colon\R[X]\!\setminus\!\{0\}\to\N       \vspace*{-7pt}   \] 
     haben, die jedem Polynom seinen Grad zuordnet. Weiter haben wir mit der
@@ -614,7 +614,7 @@ sogar ein euklidischer Ring ist, und somit $\R[X]$ nur als HIR betrachten.
     Euklidschen Algorithmus} darauf anzuwenden, da man die dabei zusätzlich
     gewonnenen Elemente sowieso benötigt. Wir erhalten:
     \[ \left( 1-\frac{1}{2}X \right) \cdot (X^2+X) + \left( -\frac{1}{4} \right)
-        \cdot (-2X^3+2X^2) = X  \]
+        \cdot (-2X^3+2X^2) = X = \mr{ggT}(X^2+X,-2X^3+2X^2) \]
     Die Transformationsmatrix lautet dann:
     \[ S_3' := \Matrix{ 1 & 0 & 0                           \\[3pt]
                         0 & 1-\frac{1}{2}X  & -\frac{1}{4}  \\[3pt]
@@ -627,7 +627,7 @@ sogar ein euklidischer Ring ist, und somit $\R[X]$ nur als HIR betrachten.
                     0   & -4X^4+4X^2    }       \]
     Dies kann nun durch entsprechende Subtraktion auf dasselbe Ergebnis wie in
     \cref{bsp:polyring} gebracht werden. Wir erhalten also dieselben
-    Elementarteiler. Weiter hätte man natürlich auch wieder passende
+    Elementarteiler. Weiter hätte man natürlich auch wieder geeignete
     (im Allgemeinen von denen in \cref{bsp:polyring} verschiedene)
     Transformationsmatrizen erhalten, hätte man jeweils zusätzlich zu den
     Matrizen $T_1'$ und $S_3'$ die passenden Matrizen, die für die
