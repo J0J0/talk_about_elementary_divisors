@@ -38,9 +38,10 @@ Länge:
 \begin{thLemma}[Länge des Restklassenmoduls über Hauptidealringen]%
     \label{lem:len:hir}
     Sei $R$ ein Hauptidealring\footnote{künftig abgekürzt durch: HIR} und $a\in
-    R$ mit (bis auf Assoziiertheit eindeutiger) Primfaktorzerlegung 
-    $a = p_1\cdots p_r$ (existiert nach \cite[14--16]{talk:rief}). % TODO: check cite!
-    Dann hat der Restklassenmodul $R/aR$ (über $R$) die Länge $\len(R/aR) = r$.
+    R\setminus (R^\times\cup\{0\})$ mit (bis auf Assoziiertheit eindeutiger)
+    Primfaktorzerlegung $a = p_1\cdots p_r$ (existiert nach
+    \cite[14--16]{talk:rief}). 
+    Dann hat der Restklassenmodul $R/aR$ (über~$R$) die Länge $\len(R/aR) = r$.
 \end{thLemma}
 \begin{proof}
     Zunächst ist klar, dass die Ideale in $R$ gerade den Untermoduln von $R$
@@ -66,7 +67,6 @@ Länge:
     $R$ ein HIR ist, wird jedes dieser $\mathfrak{a}_i$ von einem Element $a_i$
     erzeugt: $\mathfrak{a}_i = \Spann{a_i}$. Da für $i\in\{0,\ldots \ell-1\}$ und
     die Ideale $\mathfrak{a}_i,\mathfrak{a}_{i+1}$ die Äquivalenz
-    % TODO: \cite ??
     \[ \mathfrak{a}_i \subset \mathfrak{a}_{i+1} \iff a_{i+1} \mid a_i \]
     gilt und wir aber echte Inklusion betrachten, erhalten wir, dass auch
     $a_{i+1}$ ein echter Teiler von $a_i$ sein muss. Mit der vorausgesetzten

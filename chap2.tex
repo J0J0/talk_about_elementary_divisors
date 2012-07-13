@@ -122,9 +122,9 @@ bewiesen, falls das nun folgende Lemma gilt, das oben verwendet wurde.
     angegeben werden, um es durchzuführen, ohne jedoch allzu genau auf die
     Begründungen einzugehen.
     
-    Sei zunächst $R$ ein euklidischer Ring mit Gradfunktion
-    $\delta\colon R\!\setminus\!\{0\}\to\N$. 
-    (Siehe auch \cite[Def.~4]{talk:rief}.) % TODO: check cite!
+    Sei zunächst $R$ ein euklidischer Ring mit der Gradfunktion
+    $\delta\colon R\setminus\!\{0\}\to\N$. 
+    (Siehe auch \cite[Def.~4]{talk:rief}.) 
     Sei weiter das Minimum aller Grade von Elementen der Matrix $A$ wie folgt
     definiert:
     \[ \D(A) := \min\bigl\{ \delta(\A ij) \;\big\vert\; \A ij\neq0,\;
@@ -201,8 +201,7 @@ werden:
 \begin{thLemma}\label{lem:iso:divisors:unique}
     Sei $R$ ein HIR und es gelte
     \[ Q \cong \bigoplus_{i=1}^s R/\alpha_i R \,, \]
-    mit $\alpha_1,\ldots,\alpha_s \in R\setminus (R^\times\cup\{0\})$, wobei
-    $R^\times$ die Einheitengruppe von $R$ bezeichne, und
+    mit $\alpha_1,\ldots,\alpha_s \in R\setminus (R^\times\cup\{0\})$ und
     $\alpha_i\mid\alpha_{i+1}$ für $i\in\{1,\ldots,s-1\}$.
     Dann sind $\alpha_1,\ldots,\alpha_s$ bis auf Assoziiertheit eindeutig durch
     $Q$ bestimmt.
@@ -306,10 +305,9 @@ werden:
 
 Damit sind wir mit dem Beweis des Elementarteilersatzes (und der
 \enquote{Matrixversion}) fertig. Wir fassen noch einmal zusammen, dass wir uns
-auch in der Situation von \cref{ets}
-auf das konstruktive Verfahren, das in der Beweisskizze zu \cref{ets:matrix}
-gegeben wurde, beziehen können, um konkret die Elementarteiler eines Untermoduls
-zu bestimmen:
+auch in der Situation von \cref{ets} auf das konstruktive Verfahren, das in der
+Beweisskizze zu \cref{ets:matrix} gegeben wurde, beziehen können, um konkret die
+Elementarteiler eines Untermoduls zu bestimmen:
 
 \begin{thKorollar}
     Seien $F,F'$ endlich erzeugte freie Moduln über einem HIR $R$ und sei weiter

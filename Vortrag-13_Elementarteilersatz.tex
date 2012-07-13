@@ -1,16 +1,24 @@
 \documentclass[11pt,a4paper,ngerman,DIV=11]{scrreprt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{array}
-\usepackage[numbers,sort&compress]{natbib}
+
 \usepackage[babel]{csquotes}
 \usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{ifmtarg}
+
 %\usepackage[pdftex]{graphicx}
 \usepackage[all]{xy}
 \usepackage{gauss}
@@ -21,31 +29,39 @@
 %
 \usepackage{cleveref}
 
-\newcommand{\pref}[1]{(\ref{#1})}
-\newcommand{\pcref}[1]{(\cref{#1})}
+\usepackage{helpers} % my own helpers.sty
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% macro definitions and other things
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% global redefinition of paragraph spacing
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5em}
 
-\newcommand{\origepsilon}{} % keine LaTeX-Kollisionen
-\let\origepsilon=\epsilon
-\let\epsilon=\varepsilon
+% make parenthesized versions of \ref and cleveref's \cref
+\newcommand*{\pref}[1]{(\ref{#1})}
+\newcommand*{\pcref}[1]{(\cref{#1})}
 
-\let\origphi=\phi
-\let\phi=\varphi
+% make \varepsilon and \varphi default
+\varifygreekletters{\epsilon\phi}
 
+% change the qedsymbol to my favoured blacksquare
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
+% style for /all/ theorem like environments
 \newtheoremstyle{mythms}
- {15pt}% Space above
- {12pt}% Space below 
- {}% Body font
- {}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
- {\bfseries}% Theorem head font
- {.}% Punctuation after theorem head
- {0.6cm}% Space after theorem head: Space after theorem head: { } = normal interword space; \newline = linebreak
- {}% Theorem head spec (can be left empty, meaning `normal')
+ {15pt}% space above
+ {12pt}% space below 
+ {}% body font
+ {}% indent amount
+ {\bfseries}% theorem head font
+ {.}% punctuation after theorem head
+ {0.6cm}% space after theorem head (\newline possible)
+ {}% theorem head spec 
  
+% set style and define thm like environments
 \theoremstyle{mythms}
 \newtheorem{globalnum}{DUMMY DUMMY DUMMY}[chapter]
 \newtheorem{thDef}[globalnum]{Definition}
@@ -65,161 +81,63 @@
 }
 %
 
+% also define a 'proofsketch' version of 'proof'
 \newenvironment{proofsketch}[1][]{%
 \begin{proof}[Beweisskizze#1]
 }{%
 \end{proof}
 }
 
+% inject pdfbookmarks at thm like environments
 \makeatletter
 \let\origthmhead=\thmhead
 \renewcommand{\thmhead}[3]{%
-\phantomsection
 \origthmhead{#1}{#2}{#3}%
 \pdfbookmark[1]{#1\@ifnotempty{#1}{ }#2\thmnote{ (#3)}}{#1#2}%
 }
 \makeatother
 
+% define some additional 'operators'
 \DeclareMathOperator*{\Exists}{\exists}
 \DeclareMathOperator*{\forAll}{\forall}
+\DeclareMathOperator{\Kern}{ker}
+\DeclareMathOperator{\Image}{im}
+\DeclareMathOperator{\modulelength}{\ell}
 
-\newcommand{\Mid}{\,\middle\vert\,}
-%\newcommand{\Mid}{\mathrel{\middle\vert}}
-
-%\makeatletter
-%\newcommand{\defmathbbsymbol}[1]{%
-%    \expandafter\newcommand\csname #1\endcsname[1][]{%
-%        \@ifmtarg{##1}{\mathbb{#1}}{\mathbb{#1}_{##1}}%
-%    }%
-%}
-%\makeatother
-\newcommand{\defmathbbsymbol}[1]{%
-    \expandafter\newcommand\csname #1\endcsname{\mathbb{#1}}%
-}
-
-
-\defmathbbsymbol{N}
-\defmathbbsymbol{Z}
-\defmathbbsymbol{Q}
-\defmathbbsymbol{R}
-\defmathbbsymbol{C}
-
-\newcommand{\mr}{\mathrm}
-
+% define an 'abs' and 'Spann' command
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\Spann}{\langle}{\rangle}
 
-\DeclareMathOperator{\Kern}{ker}
-\DeclareMathOperator{\Image}{im}
-
-\DeclareMathOperator{\modulelength}{\ell}
-
-\newcommand{\barfrak}[1]{\bar{\mathfrak{#1}}}
-
+% define missing arrows
 \newcommand{\longto}{\longrightarrow}
-
-\newcommand{\len}[1][R]{\modulelength_{#1}}
-
 \newcommand{\longhookrightarrow}{\lhook\joinrel\relbar\joinrel\rightarrow}
 
+% provide mathbb symbols \N \Z \Q \R and \C
+\defmathbbsymbols{N Z Q R C}
+
+% just some shortcuts
+\newcommand{\mr}{\mathrm}
+\newcommand{\barfrak}[1]{\bar{\mathfrak{#1}}}
+\newcommand{\len}[1][R]{\modulelength_{#1}}
 \newcommand{\ZRest}[1]{\Z/#1\Z}
-
-\newcommand*{\Matrix}[1]{%
-\begin{pmatrix} #1 \end{pmatrix}%
-}
-\newcommand{\vect}{}
-\let\vect=\Matrix
-
 \newcommand{\D}{\mr{d}}
 \newcommand{\A}[2]{a_{#1#2}}
-
-\newcommand{\downsquigarrow}{\rotatebox{-90}{$\rightsquigarrow$}}
-
-% make gmatrix right aligned
-\makeatletter
-
-\let\g@post@orig=\g@post
-
-\newcommand{\gmatrixright}{%
-    \global\edef\g@post{\relax$}
-}
-\newcommand{\gmatrixcenter}{%
-    \global\let\g@post=\g@post@orig
-}
-
-\makeatother
-
-
-%%%%%
-
-\makeatletter
-
-\newcommand{\matops@colstart}{\begin{gmatrix}}
-\newcommand{\matops@colend}{\end{gmatrix}&}
-\newcommand{\matops@newline}{\end{gmatrix}\\\matops@turnsinto}
-\newcommand{\matops@end}{\end{gmatrix}}
-
-\newlength{\arrowpos}
-\setlength{\arrowpos}{5cm}
-
-\newcommand{\matops@turnsinto}{%
-\noalign{\vskip7pt\hbox to \arrowpos{\hfill\downsquigarrow}\vskip7pt}%
-}
-
-\newcommand{\nextcol}{\matops@colend}
-\newcommand{\nextstep}{\matops@newline}
-\newcommand{\continued}{\matops@turnsinto}
-
-\newsavebox{\matops@matrixh}
-\newlength{\matops@matrixheight}
-\savebox{\matops@matrixh}{$\displaystyle\begin{gmatrix}1\\2\\3\end{gmatrix}$}
-\setlength{\matops@matrixheight}{\ht\matops@matrixh}
-\addtolength{\matops@matrixheight}{\dp\matops@matrixh}
-
-\newcommand{\matops@interrule}{%
-\rule[-0.8\dp\matops@matrixh]{0.4pt}{0.9\matops@matrixheight}}
-
-\newcommand{\matops@interspaceleft}{\quad}
-\newcommand{\matops@interspaceright}{\qquad}
-
-\newcommand{\matops@leftparen}{%
-\ensuremath{\displaystyle\left(\vphantom{\matops@interrule}\right.}}
-\newcommand{\matops@rightparen}{%
-\ensuremath{\displaystyle\left.\vphantom{\matops@interrule}\right)}}
-    
-\newcolumntype{R}{>{\matops@colstart}r}
-\newcolumntype{C}{>{\matops@colstart}c}
-\newcolumntype{L}{>{\matops@colstart}l}
-
-\newenvironment{trimatrixoperations}[1][L]{%
-\renewcommand{\|}{\matops@colend}
-\begin{array}{@{\matops@leftparen\,}%
-              R%
-              @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
-              #1%
-              @{\matops@interspaceleft\matops@interrule\matops@interspaceright}%
-              L%
-              @{\kern-4pt\matops@rightparen}}
-}{%
-\matops@end
-\end{array}
-}
-
-\makeatother
-
 \newcommand{\vzfix}{\phantom{-}}
 
-%\newcommand{\p}[1]{\cdot(#1)}
-%\newcommand{\m}[1]{\cdot(-#1)}
 
-%%%%%
-
-
+% listing with -- is nicer than with bullets 
 \setlist[itemize,1]{label=--}
 
+% xy tip selection (ComputerModern)
 \SelectTips{cm}{}
 \UseTips
-\setcounter{secnumdepth}{0}
+
+% start at chapter 0
+\setcounter{chapter}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
